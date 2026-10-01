@@ -1,0 +1,1950 @@
+{
+  "catalog_year": "2024/2025 (תשפ\"ה)",
+  "source": "Technion Faculty of Computer Science catalog 2024/2025, pages 224-225, 227-229, 231",
+  "courses": [
+    {
+      "id": "00360044",
+      "name_he": "תכן תנועת רובוטים וניווט ע\"י חיישנים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00440105",
+      "name_he": "תורת המעגלים החשמליים",
+      "name_en": "Theory of Electronic Circuits",
+      "credits": 4.0
+    },
+    {
+      "id": "00440127",
+      "name_he": "יסודות התקני מוליכים למחצה",
+      "name_en": "Basics of Semiconductor Devices",
+      "credits": 3.5
+    },
+    {
+      "id": "00440131",
+      "name_he": "אותות ומערכות",
+      "name_en": "Signals and Systems",
+      "credits": 5.0
+    },
+    {
+      "id": "00440137",
+      "name_he": "מעגלים אלקטרוניים",
+      "name_en": "Electronic Circuits",
+      "credits": 5.0
+    },
+    {
+      "id": "00440157",
+      "name_he": "מעבדה להנדסת חשמל 1 א'",
+      "name_en": "Electrical Engineering Lab 1a",
+      "credits": 2.0
+    },
+    {
+      "id": "00440167",
+      "name_he": "פרויקט א'",
+      "name_en": "Lab. Project a",
+      "credits": 4.0
+    },
+    {
+      "id": "00440169",
+      "name_he": "פרויקט ב'",
+      "name_en": "Lab. Project B",
+      "credits": 4.0
+    },
+    {
+      "id": "00440202",
+      "name_he": "אותות אקראיים",
+      "name_en": "Random Signals",
+      "credits": 3.0
+    },
+    {
+      "id": "00440252",
+      "name_he": "מערכות ספרתיות ומבנה המחשב",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "00460201",
+      "name_he": "עיבוד אותות אקראיים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00460206",
+      "name_he": "מבוא לתקשורת ספרתית",
+      "name_en": "Introduction to Digital Communication",
+      "credits": 3.0
+    },
+    {
+      "id": "00460332",
+      "name_he": "מערכות ראייה ושמיעה",
+      "name_en": "Visual and Auditory Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "00460880",
+      "name_he": "תכן לוגי ממוחשב של שבבים",
+      "name_en": "Logic Design Automation of Vlsi Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "00480878",
+      "name_he": "ארכיטקטורות VLSI",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "00480921",
+      "name_he": "נושאים מתקדמים בראייה, מבנה תמונות וראייה ממוחשבת",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "00860761",
+      "name_he": "ניווט נעזר ראיה ממוחשבת",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00940222",
+      "name_he": "הנדסת מערכות מבוססת מודלים",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00940313",
+      "name_he": "מודלים דטרמיניסטים בחקר ביצועים",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00940314",
+      "name_he": "מודלים סטוכסטיים בחקר ביצועים",
+      "name_en": "Stochastic Models in Oper.Research",
+      "credits": 3.5
+    },
+    {
+      "id": "00940333",
+      "name_he": "מודלים דינמיים בחקר ביצועים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00940334",
+      "name_he": "סימולציה ספרתית",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00940412",
+      "name_he": "הסתברות מ'",
+      "name_en": "Probability (Advanced)",
+      "credits": 4.0
+    },
+    {
+      "id": "00940423",
+      "name_he": "מבוא לסטטיסטיקה",
+      "name_en": "Introduction to Statistics",
+      "credits": 3.5
+    },
+    {
+      "id": "00940591",
+      "name_he": "מבוא לכלכלה",
+      "name_en": "Introductory Economics",
+      "credits": 3.5
+    },
+    {
+      "id": "00960200",
+      "name_he": "כלים מתמטיים למדעי הנתונים",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00960211",
+      "name_he": "מודלים למסחר אלקטרוני",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00960224",
+      "name_he": "ניהול מידע מבוזר",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "00960250",
+      "name_he": "מערכות מידע מבוזרות",
+      "name_en": "Distributed Information Systems",
+      "credits": 3.5
+    },
+    {
+      "id": "00960262",
+      "name_he": "אחזור מידע",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00960326",
+      "name_he": "אלגוריתמים בתזמון",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "00960411",
+      "name_he": "למידה סטטיסטית מבוססת נתונים",
+      "name_en": "Machine Learning 1",
+      "credits": 3.5
+    },
+    {
+      "id": "00970317",
+      "name_he": "תורת המשחקים השיתופיים",
+      "name_en": "Cooperative Game Theory",
+      "credits": 2.5
+    },
+    {
+      "id": "01040031",
+      "name_he": "חשבון אינפיניטסימלי 1מ'",
+      "name_en": "Calculus 1M",
+      "credits": 5.5
+    },
+    {
+      "id": "01040032",
+      "name_he": "חשבון אינפיניטסימלי 2מ'",
+      "name_en": "Calculus 2M",
+      "credits": 5.0
+    },
+    {
+      "id": "01040033",
+      "name_he": "אנליזה וקטורית",
+      "name_en": "Vector Analysis",
+      "credits": 2.5
+    },
+    {
+      "id": "01040122",
+      "name_he": "תורת הפונקציות 1",
+      "name_en": "Complex Function Theory 1",
+      "credits": 3.5
+    },
+    {
+      "id": "01040134",
+      "name_he": "אלגברה מודרנית ח'",
+      "name_en": "Modern Algebra H",
+      "credits": 2.5
+    },
+    {
+      "id": "01040135",
+      "name_he": "משוואות דיפרנציאליות רגילות ת'",
+      "name_en": "",
+      "credits": 2.5
+    },
+    {
+      "id": "01040142",
+      "name_he": "מבוא למרחבים מטריים וטופולוגיים",
+      "name_en": "Int. to Metric and Topological Space",
+      "credits": 3.5
+    },
+    {
+      "id": "01040157",
+      "name_he": "מבוא לתורת המספרים",
+      "name_en": "Introduction to Number Theory",
+      "credits": 3.5
+    },
+    {
+      "id": "01040158",
+      "name_he": "מבוא לחבורות",
+      "name_en": "Introduction to Group Theory",
+      "credits": 3.5
+    },
+    {
+      "id": "01040165",
+      "name_he": "פונקציות ממשיות",
+      "name_en": "Real Functions",
+      "credits": 3.5
+    },
+    {
+      "id": "01040166",
+      "name_he": "אלגברה אמ'",
+      "name_en": "Algebra Am",
+      "credits": 5.5
+    },
+    {
+      "id": "01040174",
+      "name_he": "אלגברה במ'",
+      "name_en": "Algebra Bm",
+      "credits": 3.5
+    },
+    {
+      "id": "01040177",
+      "name_he": "גאומטריה דיפרנציאלית",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "01040192",
+      "name_he": "מבוא למתמטיקה שימושית",
+      "name_en": "Introduction to Applied Mathematics",
+      "credits": 3.0
+    },
+    {
+      "id": "01040221",
+      "name_he": "פונקציות מרוכבות והתמרות אינטגרליות",
+      "name_en": "",
+      "credits": 4.0
+    },
+    {
+      "id": "01040223",
+      "name_he": "משוואות דיפרנציאליות חלקיות וטורי פוריה",
+      "name_en": "",
+      "credits": 4.0
+    },
+    {
+      "id": "01040279",
+      "name_he": "מבוא לחוגים ושדות",
+      "name_en": "Introduction to Rings and Fields",
+      "credits": 2.5
+    },
+    {
+      "id": "01040285",
+      "name_he": "משוואות דיפרנציאליות רגילות א'",
+      "name_en": "Ordinary Differential Equations a",
+      "credits": 3.5
+    },
+    {
+      "id": "01040293",
+      "name_he": "תורת הקבוצות",
+      "name_en": "Set Theory",
+      "credits": 2.5
+    },
+    {
+      "id": "01040294",
+      "name_he": "מבוא לאנליזה פונקציונלית ואנליזת פורייה",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "01040295",
+      "name_he": "חשבון אינפיניטסימלי 3",
+      "name_en": "Infinitesimal Calculus 3",
+      "credits": 5.0
+    },
+    {
+      "id": "01060378",
+      "name_he": "תורת המידה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "01060383",
+      "name_he": "טופולוגיה אלגברית",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "01140036",
+      "name_he": "פיזיקה סטטיסטית ותרמית",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "01140052",
+      "name_he": "פיזיקה 2",
+      "name_en": "Physics 2",
+      "credits": 3.5
+    },
+    {
+      "id": "01140054",
+      "name_he": "פיזיקה 3",
+      "name_en": "Physics 3",
+      "credits": 3.5
+    },
+    {
+      "id": "01140071",
+      "name_he": "פיזיקה 1מ'",
+      "name_en": "Physics 1M",
+      "credits": 3.5
+    },
+    {
+      "id": "01140073",
+      "name_he": "פיזיקה קוונטית להנדסה",
+      "name_en": "Quantum physics for engineering",
+      "credits": 3.5
+    },
+    {
+      "id": "01140075",
+      "name_he": "פיזיקה 2ממ",
+      "name_en": "Physics 2Mm",
+      "credits": 5.0
+    },
+    {
+      "id": "01140101",
+      "name_he": "מכניקה אנליטית",
+      "name_en": "Analytical Mechanics",
+      "credits": 4.0
+    },
+    {
+      "id": "01140246",
+      "name_he": "אלקטרומגנטיות ואלקטרודינמיקה",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "01150203",
+      "name_he": "פיזיקה קוונטית 1",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "01150204",
+      "name_he": "פיזיקה קוונטית 2",
+      "name_en": "Quantum Physics 2",
+      "credits": 5.0
+    },
+    {
+      "id": "01160217",
+      "name_he": "פיזיקה של מצב מוצק",
+      "name_en": "Solid State Physics",
+      "credits": 3.5
+    },
+    {
+      "id": "01160354",
+      "name_he": "אסטרופיזיקה וקוסמולוגיה",
+      "name_en": "Astrophysics and Cosmology",
+      "credits": 3.5
+    },
+    {
+      "id": "01240120",
+      "name_he": "יסודות הכימיה",
+      "name_en": "Principles of Chemistry",
+      "credits": 5.0
+    },
+    {
+      "id": "01240400",
+      "name_he": "כימיה קוונטית",
+      "name_en": "Quantum Chemistry 1",
+      "credits": 5.0
+    },
+    {
+      "id": "01240503",
+      "name_he": "כימיה פיזיקלית 1ב'",
+      "name_en": "Physical Chemistry 1B",
+      "credits": 2.5
+    },
+    {
+      "id": "01240510",
+      "name_he": "כימיה פיזיקלית",
+      "name_en": "Physical Chemistry",
+      "credits": 4.0
+    },
+    {
+      "id": "01240801",
+      "name_he": "כימיה אורגנית 1ב'",
+      "name_en": "",
+      "credits": 2.5
+    },
+    {
+      "id": "01250001",
+      "name_he": "כימיה כללית",
+      "name_en": "General Chemistry",
+      "credits": 3.0
+    },
+    {
+      "id": "01250801",
+      "name_he": "כימיה אורגנית",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "01340019",
+      "name_he": "מבוא לביוכימיה ואנזימולוגיה",
+      "name_en": "Introduction to Biochemistry and Enzymology",
+      "credits": 2.5
+    },
+    {
+      "id": "01340020",
+      "name_he": "גנטיקה כללית",
+      "name_en": "General Genetics",
+      "credits": 3.5
+    },
+    {
+      "id": "01340058",
+      "name_he": "ביולוגיה 1",
+      "name_en": "Biology 1",
+      "credits": 3.0
+    },
+    {
+      "id": "01340082",
+      "name_he": "ביולוגיה מולקולרית",
+      "name_en": "Molecular Biology",
+      "credits": 2.5
+    },
+    {
+      "id": "01340113",
+      "name_he": "מסלולים מטבוליים",
+      "name_en": "Metabolic Pathways",
+      "credits": 3.5
+    },
+    {
+      "id": "01340119",
+      "name_he": "בקרת הביטוי הגנטי",
+      "name_en": "",
+      "credits": 2.5
+    },
+    {
+      "id": "01340128",
+      "name_he": "ביולוגיה של התא",
+      "name_en": "",
+      "credits": 3.5
+    },
+    {
+      "id": "01340142",
+      "name_he": "מעבדה בגנטיקה מולקולרית",
+      "name_en": "Molecular Genetics Laboratory",
+      "credits": 2.5
+    },
+    {
+      "id": "02140909",
+      "name_he": "בעיות במדעי המחשב 2-כישורים רכים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02340114",
+      "name_he": "מבוא למדעי המחשב מ'",
+      "name_en": "Introduction to Computer Science",
+      "credits": 4.0
+    },
+    {
+      "id": "02340118",
+      "name_he": "ארגון ותכנות המחשב",
+      "name_en": "Computer Organization and Programming",
+      "credits": 3.0
+    },
+    {
+      "id": "02340123",
+      "name_he": "מערכות הפעלה",
+      "name_en": "Operating Systems",
+      "credits": 4.5
+    },
+    {
+      "id": "02340124",
+      "name_he": "מבוא לתכנות מערכות",
+      "name_en": "Introduction to Systems Programming",
+      "credits": 4.0
+    },
+    {
+      "id": "02340125",
+      "name_he": "אלגוריתמים נומריים",
+      "name_en": "Numerical Algorithms",
+      "credits": 3.0
+    },
+    {
+      "id": "02340129",
+      "name_he": "מבוא לתורת הקבוצות ואוטומטים למדמ\"ח",
+      "name_en": "Int. to Set Theory and Automata for Cs",
+      "credits": 3.0
+    },
+    {
+      "id": "02340141",
+      "name_he": "קומבינטוריקה למדמ\"ח",
+      "name_en": "Combinatorics for Cs",
+      "credits": 3.0
+    },
+    {
+      "id": "02340218",
+      "name_he": "מבני נתונים 1",
+      "name_en": "Data Structures 1",
+      "credits": 3.0
+    },
+    {
+      "id": "02340247",
+      "name_he": "אלגוריתמים 1",
+      "name_en": "Algorithms 1",
+      "credits": 3.0
+    },
+    {
+      "id": "02340252",
+      "name_he": "מערכות ספרתיות ומבנה המחשב",
+      "name_en": "",
+      "credits": 5.0
+    },
+    {
+      "id": "02340268",
+      "name_he": "מבני נתונים ואלגוריתמים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02340292",
+      "name_he": "לוגיקה למדמ\"ח",
+      "name_en": "Logic for Cs",
+      "credits": 3.0
+    },
+    {
+      "id": "02340302",
+      "name_he": "פרויקט בקומפילציה ה'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02340303",
+      "name_he": "פרויקט במערכות הפעלה ה'",
+      "name_en": "Project in Operating Systems U",
+      "credits": 3.0
+    },
+    {
+      "id": "02340304",
+      "name_he": "פרויקט בבינה מלאכותית ה'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02340313",
+      "name_he": "פרויקט תעשייתי",
+      "name_en": "Industrial Project",
+      "credits": 3.0
+    },
+    {
+      "id": "02340326",
+      "name_he": "פרויקט בגרפיקה ממוחשבת ה'",
+      "name_en": "Project in Computer Graphics H",
+      "credits": 3.0
+    },
+    {
+      "id": "02340329",
+      "name_he": "פרויקט בעיבוד וניתוח תמונות",
+      "name_en": "Project in Image Processing and Analysis",
+      "credits": 4.0
+    },
+    {
+      "id": "02340493",
+      "name_he": "מבוא לאבטחת סייבר",
+      "name_en": "",
+      "credits": 1.0
+    },
+    {
+      "id": "02340901",
+      "name_he": "סדנה בתכנות תחרותי",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360002",
+      "name_he": "נושאים בחדשנות ויזמות במדעי המחשב",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360003",
+      "name_he": "נושאים נבחרים באלגוריתמי ניהול נתונים לקבלת החלטות",
+      "name_en": "Data Management Algorithms For Decision",
+      "credits": 2.0
+    },
+    {
+      "id": "02360004",
+      "name_he": "נושאים נבחרים בטרנספורמרים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360005",
+      "name_he": "נושאים נבחרים במערכות הפעלה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360006",
+      "name_he": "נושאים נבחרים בבינה מלאכותית ורובוטיקה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360007",
+      "name_he": "נושאים נבחרים בלמידה לראייה ממוחשבת בתלת מימד",
+      "name_en": "Advanced Topics in Computer Vision",
+      "credits": 2.0
+    },
+    {
+      "id": "02360008",
+      "name_he": "נושאים נבחרים בלמידה ביישומי אבטחת חומרה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360009",
+      "name_he": "נושאים נבחרים בפיתוח בגרעין של לינוקס בקהילת קוד פתוח",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360010",
+      "name_he": "נושאים נבחרים בסמינר לניהול נתונים אחראי",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360011",
+      "name_he": "נושאים נבחרים באלגוריתמים לגרפים דינמיים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360012",
+      "name_he": "נושאים במערכות מקביליות ומבוזרות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360013",
+      "name_he": "נושאים נבחרים בסמינר במיטוב ביצועים של מערכות תוכנה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360014",
+      "name_he": "נושאים נבחרים בגיאומטריה שימושית – מבוא ושימושים של גאומטריה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360016",
+      "name_he": "נושאים נבחרים באלגוריתמים לאופטימיזציה תת- מודולרית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360025",
+      "name_he": "אוטומטים, לוגיקה ומשחקים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360026",
+      "name_he": "ידע ומשחקים במערכות מבוזרות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360125",
+      "name_he": "פרויקט בלמידה ואבטחת מערכות מחשב",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360201",
+      "name_he": "מבוא לייצוג ועיבוד מידע",
+      "name_en": "Introduction to Data Processing and Representation",
+      "credits": 3.0
+    },
+    {
+      "id": "02360203",
+      "name_he": "נושאים נבחרים בשיתופיות במערכות בינה מלאכותית",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360204",
+      "name_he": "סמינר באימות פורמלי",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360205",
+      "name_he": "נושאים מתקדמים בלמידה עמוקה על נתונים גאומטריים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360206",
+      "name_he": "נושאים נבחרים בסדרות וגרף דה ברוין",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360207",
+      "name_he": "נושאים נבחרים בהתקפות עוינות על מודלי למידה עמוקה ומערכות אבטחה",
+      "name_en": "Advanced Topics in adversarial attacks on deep learning models and cyber security systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360216",
+      "name_he": "גרפיקה ממוחשבת 1",
+      "name_en": "COMPUTER GRAPHICS 1",
+      "credits": 3.0
+    },
+    {
+      "id": "02360267",
+      "name_he": "מבנה מחשבים",
+      "name_en": "Computer Architecture",
+      "credits": 3.0
+    },
+    {
+      "id": "02360268",
+      "name_he": "ארכיטקטורת מעבדים בגישה בונה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360270",
+      "name_he": "ניהול פרויקטי תוכנה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360271",
+      "name_he": "פיתוח מבוסס אנדרואיד",
+      "name_en": "Android Development",
+      "credits": 2.0
+    },
+    {
+      "id": "02360272",
+      "name_he": "פרויקט פיתוח מבוסס אנדרואיד",
+      "name_en": "Project in Android Development",
+      "credits": 3.0
+    },
+    {
+      "id": "02360278",
+      "name_he": "מאיצים חישוביים ומערכות מואצות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360299",
+      "name_he": "מבוא לעיבוד שפות טבעיות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360303",
+      "name_he": "פרויקט בעיבוד שפות טבעיות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360304",
+      "name_he": "לוגיקה למדעי המחשב 2",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360306",
+      "name_he": "גרפים מקריים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360309",
+      "name_he": "מבוא לתורת הצפינה",
+      "name_en": "Introduction to Coding Theory",
+      "credits": 3.0
+    },
+    {
+      "id": "02360310",
+      "name_he": "תורת השפות הפורמליות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360313",
+      "name_he": "תורת הסיבוכיות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360315",
+      "name_he": "שיטות אלגבריות במדעי המחשב",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360318",
+      "name_he": "אנליזה של פונקציות בוליאניות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360319",
+      "name_he": "שפות תכנות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360321",
+      "name_he": "שיטות בהנדסת תוכנה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360322",
+      "name_he": "מערכות אחסון מידע",
+      "name_en": "Information Storage Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360323",
+      "name_he": "פרויקט בעיבוד נתונים מ'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360324",
+      "name_he": "גרפיקה ממוחשבת 2",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360328",
+      "name_he": "פרויקט בגרפיקה ממוחשבת מ'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360329",
+      "name_he": "עיבוד ספרתי של גאומטריה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360330",
+      "name_he": "מבוא לאופטימיזציה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360332",
+      "name_he": "האינטרנט של הדברים – טכנולוגיות ויישומים",
+      "name_en": "The Internet of Things (Iot) - Technologies and Implementations",
+      "credits": 2.0
+    },
+    {
+      "id": "02360333",
+      "name_he": "פרויקט באינטרנט של הדברים",
+      "name_en": "Project in the Internet of Things",
+      "credits": 3.0
+    },
+    {
+      "id": "02360334",
+      "name_he": "מבוא לרשתות מחשבים",
+      "name_en": "Introduction to Computer Networks",
+      "credits": 3.0
+    },
+    {
+      "id": "02360336",
+      "name_he": "פתרון נומרי של משוואות דיפ. חלקיות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360340",
+      "name_he": "פרויקט בתקשורת מחשבים",
+      "name_en": "Project in Computer Communication",
+      "credits": 3.0
+    },
+    {
+      "id": "02360341",
+      "name_he": "תקשורת באינטרנט",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360342",
+      "name_he": "מבוא לאימות תוכנה",
+      "name_en": "Introduction to Software Verification",
+      "credits": 3.0
+    },
+    {
+      "id": "02360343",
+      "name_he": "תורת החישוביות",
+      "name_en": "Theory of Computation",
+      "credits": 3.0
+    },
+    {
+      "id": "02360345",
+      "name_he": "אימות אוטומטי של מערכות תוכנה וחומרה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360346",
+      "name_he": "פרויקט באימות תוכניות בעזרת מחשב",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360347",
+      "name_he": "היסק אוטומטי וסינתזה של תוכנה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360348",
+      "name_he": "מבוא לממשקי אדם-מחשב",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360349",
+      "name_he": "פרויקט באבטחת מידע",
+      "name_en": "Project in Information Security",
+      "credits": 3.0
+    },
+    {
+      "id": "02360350",
+      "name_he": "הגנה ברשתות",
+      "name_en": "Network Security",
+      "credits": 3.0
+    },
+    {
+      "id": "02360351",
+      "name_he": "מערכות מבוזרות",
+      "name_en": "Distributed Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360356",
+      "name_he": "תאוריה של מערכות מסד נתונים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360357",
+      "name_he": "אלגוריתמים מבוזרים א'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360358",
+      "name_he": "נושאים מתקדמים באלגוריתמים מבוזרים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360359",
+      "name_he": "אלגוריתמים 2",
+      "name_en": "Algorithms 2",
+      "credits": 3.0
+    },
+    {
+      "id": "02360360",
+      "name_he": "תורת הקומפילציה",
+      "name_en": "Theory of Compilation",
+      "credits": 3.0
+    },
+    {
+      "id": "02360361",
+      "name_he": "פרויקט בקומפילציה מ'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360363",
+      "name_he": "מסדי נתונים",
+      "name_en": "Databases",
+      "credits": 3.0
+    },
+    {
+      "id": "02360366",
+      "name_he": "פרויקט במערכות הפעלה מ'",
+      "name_en": "Project in Operating Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360369",
+      "name_he": "תכנות מערכות ברשת האינטרנט",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360370",
+      "name_he": "תכנות מקבילי ומבוזר לעיבוד נתונים ולמידה חישובית",
+      "name_en": "Concurrent and Distribute Programming for Data Procesing and Machine Learning",
+      "credits": 3.0
+    },
+    {
+      "id": "02360371",
+      "name_he": "פרויקט בתכנות מקבילי ומבוזר",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360372",
+      "name_he": "רשתות בייסיאניות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360373",
+      "name_he": "סינתזה של תמונות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360374",
+      "name_he": "שיטות הסתברותיות ואלגוריתמים",
+      "name_en": "Probabilistic Methods and Algorithms",
+      "credits": 3.0
+    },
+    {
+      "id": "02360376",
+      "name_he": "הנדסת מערכות הפעלה",
+      "name_en": "",
+      "credits": 4.0
+    },
+    {
+      "id": "02360377",
+      "name_he": "אלגוריתמים מבוזרים בגרפים",
+      "name_en": "Distributed Graph Algorithms",
+      "credits": 3.0
+    },
+    {
+      "id": "02360378",
+      "name_he": "עקרונות ניהול מידע חסר ודאות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360379",
+      "name_he": "קידוד ואלגוריתמים לזכרונות",
+      "name_en": "Coding and Algorithms for Memories",
+      "credits": 3.0
+    },
+    {
+      "id": "02360381",
+      "name_he": "פרויקט ב-VLSI ב'",
+      "name_en": "",
+      "credits": 4.0
+    },
+    {
+      "id": "02360388",
+      "name_he": "פרויקט במערכות אחסון",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360422",
+      "name_he": "טכנולוגיות ומערכות אחסון מתקדמות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360490",
+      "name_he": "אבטחת מחשבים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360491",
+      "name_he": "תכנות מאובטח",
+      "name_en": "Secure Programming",
+      "credits": 3.0
+    },
+    {
+      "id": "02360496",
+      "name_he": "הנדסה לאחור",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360499",
+      "name_he": "פרויקט בחומות אש",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360500",
+      "name_he": "קריפטאנליזה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360501",
+      "name_he": "מבוא לבינה מלאכותית",
+      "name_en": "Introduction to Artificial Intelligence",
+      "credits": 3.0
+    },
+    {
+      "id": "02360502",
+      "name_he": "פרויקט בבינה מלאכותית",
+      "name_en": "Artificial Intelligence and Heuristics Laboratory",
+      "credits": 3.0
+    },
+    {
+      "id": "02360503",
+      "name_he": "פרויקט תכנות מתקדם במדעי המחשב 1",
+      "name_en": "Project in Computer Science Advanced Programming 1",
+      "credits": 3.0
+    },
+    {
+      "id": "02360504",
+      "name_he": "פרויקט המשך בתוכנה",
+      "name_en": "Project in Software",
+      "credits": 3.0
+    },
+    {
+      "id": "02360506",
+      "name_he": "קריפטולוגיה מודרנית",
+      "name_en": "Modern Cryptology",
+      "credits": 3.0
+    },
+    {
+      "id": "02360508",
+      "name_he": "קריפטוגרפיה וסיבוכיות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360509",
+      "name_he": "נושאים מתקדמים במבנה מחשבים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360510",
+      "name_he": "מימוש מערכות מסדי נתונים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360512",
+      "name_he": "פרויקט במערכות פיתוח תוכנה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360513",
+      "name_he": "פרויקט מתקדם במערכות פיתוח תוכנה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360515",
+      "name_he": "נושאים מתקדמים בתורת הצפינה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360518",
+      "name_he": "סיבוכיות תקשורת",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360520",
+      "name_he": "קידוד במערכות אחסון מידע",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360521",
+      "name_he": "אלגוריתמי קירוב",
+      "name_en": "Approximation Algorithms",
+      "credits": 2.0
+    },
+    {
+      "id": "02360522",
+      "name_he": "אלגוריתמים בביולוגיה חישובית",
+      "name_en": "Algorithms in Computational Biology",
+      "credits": 3.0
+    },
+    {
+      "id": "02360523",
+      "name_he": "מבוא לביואינפורמטיקה",
+      "name_en": "Introduction to Bioinformatics",
+      "credits": 2.5
+    },
+    {
+      "id": "02360524",
+      "name_he": "פרויקט בביואינפורמטיקה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360525",
+      "name_he": "מבוא לקידוד רשת, חסמים ובניות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360526",
+      "name_he": "פרויקט תכנות מתקדם במדעי המחשב 2",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360612",
+      "name_he": "נושאים מתקדמים בקריפטולוגיה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360613",
+      "name_he": "נושאים מתקדמים בקריפטולוגיה ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360620",
+      "name_he": "נושאים מתקדמים באלגוריתמים ה'",
+      "name_en": "Advanced Topics in Algorithms L",
+      "credits": 2.0
+    },
+    {
+      "id": "02360621",
+      "name_he": "נושאים מתקדמים באלגוריתמים ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360622",
+      "name_he": "נושאים מתקדמים מס' 2 באלגוריתמים ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360623",
+      "name_he": "נושאים מתקדמים מס' 2 באלגוריתמים ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360624",
+      "name_he": "נושאים מתקדמים בשיטות אימות פורמליות (אימות תוכנה) ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360625",
+      "name_he": "נושאים מתקדמים בשיטות אימות פורמליות (אימות תוכנה) ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360627",
+      "name_he": "נושאים מתקדמים בראייה ממוחשבת ועיבוד תמונות ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360628",
+      "name_he": "נושאים מתקדמים בגרפיקה ממוחשבת ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360629",
+      "name_he": "נושאים מתקדמים בגרפיקה ממוחשבת ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360630",
+      "name_he": "נושאים מתקדמים בעיבוד שפה טבעית ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360631",
+      "name_he": "נושאים מתקדמים בעיבוד שפה טבעית ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360632",
+      "name_he": "נושאים מתקדמים בביואינפורמטיקה ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360633",
+      "name_he": "נושאים מתקדמים בביואינפורמטיקה ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360634",
+      "name_he": "נושאים מתקדמים ברשתות תקשורת מחשבים ה'",
+      "name_en": "Advanced Topics in Computer Communication Networks L",
+      "credits": 2.0
+    },
+    {
+      "id": "02360635",
+      "name_he": "נושאים מתקדמים ברשתות תקשורת מחשבים ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360637",
+      "name_he": "נושאים מתקדמים בלוגיקה וחישוביות ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360638",
+      "name_he": "נושאים מתקדמים בתכנון וניתוח רשתות ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360640",
+      "name_he": "נושאים מתקדמים באינפורמציה קוונטית ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360641",
+      "name_he": "נושאים מתקדמים באינפורמציה קוונטית ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360643",
+      "name_he": "נושאים מתקדמים ברובוטיקה ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360644",
+      "name_he": "נושאים מתקדמים בחישוב מדעי ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360645",
+      "name_he": "נושאים מתקדמים בחישוב מדעי ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360646",
+      "name_he": "נושאים מתקדמים בתאוריה של מדעי המחשב ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360647",
+      "name_he": "נושאים מתקדמים בתאוריה של מדעי המחשב ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360648",
+      "name_he": "נושאים מתקדמים בסיבוכיות של מדעי המחשב ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360649",
+      "name_he": "נושאים מתקדמים בסיבוכיות של מדעי המחשב ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360650",
+      "name_he": "נושאים מתקדמים בהנדסת תוכנה ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360651",
+      "name_he": "נושאים מתקדמים בהנדסת תוכנה ה'+ת'",
+      "name_en": "Advanced Topics in Software Engineering L+T",
+      "credits": 3.0
+    },
+    {
+      "id": "02360652",
+      "name_he": "נושאים מתקדמים באבטחת מידע ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360653",
+      "name_he": "נושאים מתקדמים באבטחת מידע ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360654",
+      "name_he": "נושאים מתקדמים מס' 2 בהנדסת תוכנה ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360655",
+      "name_he": "נושאים מתקדמים מס' 2 בהנדסת תוכנה ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360657",
+      "name_he": "נושאים מתקדמים בתאוריה של ניהול מידע ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360658",
+      "name_he": "נושאים מתקדמים בחישוב טבעי ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360660",
+      "name_he": "נושאים מתקדמים בלמידה חישובית ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360661",
+      "name_he": "נושאים מתקדמים בלמידה חישובית ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360662",
+      "name_he": "נושאים מתקדמים בתורת המשחקים החישובית ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360663",
+      "name_he": "נושאים מתקדמים בתורת המשחקים החישובית ה'+ת'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360664",
+      "name_he": "נושאים מתקדמים בחישוב ביולוגי ה'",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360667",
+      "name_he": "נושאים מתקדמים במערכות לומדות והתנהגות אנושית ה'+ ת'",
+      "name_en": "MACHINE LEARNING AND HUMAN BEHAVIOR",
+      "credits": 3.0
+    },
+    {
+      "id": "02360668",
+      "name_he": "נושאים נבחרים בפרוטוקולי בלוקצ'יין ומטבעות קריפטוגרפיים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360669",
+      "name_he": "נושאים מתקדמים במבוא לבדיקת תכונות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360670",
+      "name_he": "נושאים מתקדמים באלגוריתמים 2",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360698",
+      "name_he": "הבטחת איכות תוכנה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360700",
+      "name_he": "תיכון תוכנה",
+      "name_en": "Software Design",
+      "credits": 3.0
+    },
+    {
+      "id": "02360703",
+      "name_he": "תכנות מונחה עצמים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360712",
+      "name_he": "הנדסת תוכנה אג'יילית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360715",
+      "name_he": "שיטות בניתוח של אלגוריתמים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360716",
+      "name_he": "מודלים גאומטריים במערכות תיב\"ם",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360719",
+      "name_he": "גאומטריה חישובית",
+      "name_en": "Computational Geometry",
+      "credits": 3.0
+    },
+    {
+      "id": "02360729",
+      "name_he": "פרויקט בגאומטריה חישובית",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360754",
+      "name_he": "פרויקט במערכות נבונות",
+      "name_en": "Project in Intelligent Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360755",
+      "name_he": "אלגוריתמים מבוזרים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360757",
+      "name_he": "פרויקט במערכות לומדות",
+      "name_en": "Project in Machine Learning",
+      "credits": 3.0
+    },
+    {
+      "id": "02360759",
+      "name_he": "מודלי דיפוזיה בלמידה עמוקה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360760",
+      "name_he": "למידה חישובית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360763",
+      "name_he": "למידה עמוקה ותורת הקירובים",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360766",
+      "name_he": "מבוא ללמידת מכונה",
+      "name_en": "Introduction to Machine Learning",
+      "credits": 3.5
+    },
+    {
+      "id": "02360767",
+      "name_he": "אלגוריתמים לתכנון תנועה רובוטי",
+      "name_en": "Algorithmic Robot Motion Planning",
+      "credits": 3.0
+    },
+    {
+      "id": "02360768",
+      "name_he": "פרויקט ברובוטיקה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360777",
+      "name_he": "למידה עמוקה ושימושיה",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360779",
+      "name_he": "יסודות אלגוריתמיים למידע מאסיבי",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360780",
+      "name_he": "אלגוריתמים לניהול זכרון דינמי",
+      "name_en": "Algorithms for Dynamic Memory Management",
+      "credits": 2.0
+    },
+    {
+      "id": "02360781",
+      "name_he": "למידה עמוקה על מאיצים חישוביים",
+      "name_en": "DEEP LEARNING ON COMPUTATION",
+      "credits": 3.0
+    },
+    {
+      "id": "02360800",
+      "name_he": "סמינר בהנדסת תוכנה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360811",
+      "name_he": "סמינר באנליזה נומרית 1",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360812",
+      "name_he": "סמינר באנליזה נומרית 2",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360813",
+      "name_he": "סמינר באלגוריתמים",
+      "name_en": "Seminar in Algorithms",
+      "credits": 2.0
+    },
+    {
+      "id": "02360814",
+      "name_he": "סמינר בשיטות אימות פורמליות (אימות תוכנה)",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360815",
+      "name_he": "סמינר בראיה ממוחשבת",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360816",
+      "name_he": "סמינר בגרפיקה ממוחשבת",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360817",
+      "name_he": "סמינר בעיבוד שפה טבעית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360818",
+      "name_he": "סמינר בביואינפורמטיקה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360819",
+      "name_he": "סמינר ברשתות תקשורת מחשבים",
+      "name_en": "Seminar in Computer Communication Networks",
+      "credits": 2.0
+    },
+    {
+      "id": "02360820",
+      "name_he": "סמינר בתורת הצפינה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360821",
+      "name_he": "סמינר בעיבוד תמונות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360822",
+      "name_he": "סמינר ברשתות חיבורים ורשתות מיון",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360823",
+      "name_he": "סמינר בעיבוד אינפורמציה קוונטית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360824",
+      "name_he": "סמינר ברובוטיקה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360825",
+      "name_he": "סמינר באלגוריתמים מבוזרים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360826",
+      "name_he": "סמינר במסדי נתונים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360827",
+      "name_he": "סמינר במערכות מחשבים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360828",
+      "name_he": "פרויקט במערכות מחשבים",
+      "name_en": "Project in Computer Systems",
+      "credits": 3.0
+    },
+    {
+      "id": "02360829",
+      "name_he": "סמינר באלגוריתמי קירוב",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360830",
+      "name_he": "סמינר באלגוריתמים מקביליים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360831",
+      "name_he": "סמינר בגאומטריה דיסקרטית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360832",
+      "name_he": "סמינר בתכנות מקבילי",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360833",
+      "name_he": "סמינר באוטומטים ושפות פורמליות",
+      "name_en": "Seminar in Automata and Formal Languages",
+      "credits": 2.0
+    },
+    {
+      "id": "02360834",
+      "name_he": "סמינר במערכות אחסון מידע",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360836",
+      "name_he": "סמינר בתמריצים ולמידה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360837",
+      "name_he": "סמינר בקידודים למערכות אחסון מידע",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360838",
+      "name_he": "סמינר במערכות לומדות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360839",
+      "name_he": "סמינר במערכות לומדות וכשלונותיהן",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02360860",
+      "name_he": "עיבוד תמונות דיגיטלי",
+      "name_en": "Digital Image Processing",
+      "credits": 3.0
+    },
+    {
+      "id": "02360861",
+      "name_he": "ראייה חישובית גאומטרית",
+      "name_en": "Geometric Computer Vision",
+      "credits": 3.0
+    },
+    {
+      "id": "02360862",
+      "name_he": "ייצוגים דלילים ויתירים ויישומיהם בעיבוד אותות ותמונות",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360873",
+      "name_he": "ראייה ממוחשבת",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360874",
+      "name_he": "פרויקט בראייה ממוחשבת",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360875",
+      "name_he": "זיהוי ראייתי",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360927",
+      "name_he": "מבוא לרובוטיקה",
+      "name_en": "Introduction to Robotics",
+      "credits": 3.0
+    },
+    {
+      "id": "02360990",
+      "name_he": "מבוא לעיבוד אינפורמציה קוונטית",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02360991",
+      "name_he": "פרויקט בחישוב קוונטי",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02368035",
+      "name_he": "סמינר בבינה מלאכותית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380100",
+      "name_he": "אמינות במערכות לומדות",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380125",
+      "name_he": "אלגוריתמים נומריים מ'",
+      "name_en": "",
+      "credits": 3.0
+    },
+    {
+      "id": "02380739",
+      "name_he": "גאומטריה אלגוריתמית דיסקרטית",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380790",
+      "name_he": "שיטות רב-סריג",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380900",
+      "name_he": "סמינריון מחקר בתאוריה של חישובים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380901",
+      "name_he": "סמינריון מחקר בלוגיקה וקומבינטוריקה",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "02380902",
+      "name_he": "סמינריון מחקר בקומבינטוריקה ותורת הגרפים",
+      "name_en": "",
+      "credits": 2.0
+    },
+    {
+      "id": "03240033",
+      "name_he": "אנגלית טכנית – מתקדמים ב'",
+      "name_en": "",
+      "credits": 3.0
+    }
+  ]
+}

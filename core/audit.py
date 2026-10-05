@@ -41,3 +41,22 @@ def find_missing_course_ids(rule: dict, completed_course_ids: set[str]) -> list[
             if course_id not in completed_course_ids:
                 missing_course_ids.append(course_id)
         return missing_course_ids
+
+#this func calc needed courses number minus completed courses number of the rules
+#used for none mandatory courses we only show num of points left for these categorys
+def count_remaining_courses(rule: dict, completed_course_ids: set[str]) -> int:
+    #the course ids that belong to this rule, as written in the json file
+    rule_course_ids = rule["courses"]
+    #how many of these courses the student must finish
+    needed_courses_count = rule["needed"]
+    #we count how many courses of this rule the student already finished
+    completed_courses_count = 0
+    for course_id in rule_course_ids:
+        #if this course is in the set of finished courses we count it
+        if course_id in completed_course_ids:
+            completed_courses_count += 1
+    #the remaining courses is the needed minus the completed, if negative we return 0
+    remaining_courses_count = needed_courses_count - completed_courses_count
+    return max(remaining_courses_count, 0)
+   
+ 

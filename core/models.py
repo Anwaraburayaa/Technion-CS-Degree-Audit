@@ -12,33 +12,29 @@ from enum import Enum
 class Category(Enum):
     """Categories used to classify degree requirements.
 
-    Requirement data uses these members to identify what kind of rule applies
-    to a course. The enum prevents typos and inconsistent spelling that could
+    Each member names one rule of the degree. Its value is the "key" of that rule
+    in data/requirements.json. The enum prevents typos and inconsistent spelling that could
     occur with plain strings, while each string value remains suitable for
     configuration files and other external data.
 
-    Each enum member identifies the type of requirement that a course may
+    Each enum member identifies one requirement that the student must
     satisfy.  The value of each member is the stable, machine-readable name
     used by configuration files and other parts of the audit system.
 
     Members:
-        MANDATORY_FIXED: A specific compulsory course that must be completed.
-        DIGITAL_SYSTEMS: A requirement covering digital-systems coursework.
-        COMPILATION_OR_ARCHITECTURE: A requirement satisfied by compilation or
-            computer-architecture coursework.
+        MANDATORY_FIXED: The 18 fixed mandatory courses; all are required.
+        DIGITAL_SYSTEMS: 00440252 or 02340252; one is required.
+        COMPILATION_OR_ARCHITECTURE: 02360360 or 02360267; one is required.
         EXTRA_MATH: Additional mathematics required beyond the core program.
-        SCIENCE: A general science requirement.
-        SCIENCE_CHAIN: A science requirement in which courses form a defined
-            sequence or prerequisite chain.
-        LIST_A: A course selected from the approved List A alternatives.
-        LIST_B: A course selected from the approved List B alternatives.
-        LIST_A_PLUS_B: A requirement that may be fulfilled using courses from
-            the combined List A and List B alternatives.
+        SCIENCE: At least 8 points from the science course list.
+        SCIENCE_CHAIN: One complete science chain (every course of one option).
+        LIST_A: At least 18 points from the List A courses.
+        LIST_B: Points from the List B courses; no minimum of its own.
+        LIST_A_PLUS_B: List A and List B points together; at least 24.5.
         SPORT: A physical-education or sports requirement.
-        MALAG: A requirement associated with the MALAG category or rules.
-        FREE_OTHER: Free-choice coursework that does not belong to another
-            specific requirement category.
-        GENERAL: General coursework or requirements not otherwise classified.
+        MALAG: Malag points typed by the student; at least 6.
+        FREE_OTHER: Other free-elective points typed by the student; no minimum.
+        GENERAL: SPORT + MALAG + FREE_OTHER together; at least 10 points.
         ENGLISH_TAUGHT: A requirement concerning courses taught in English.
     """
 

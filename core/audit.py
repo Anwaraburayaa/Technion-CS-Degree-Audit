@@ -13,3 +13,31 @@ def load_requirements_from_file(path: str) -> dict:
         for rule in data["rules"]:
             Category(rule["key"])  # validate that the category is a valid enum member
         return data
+
+
+  #this func gets one rule of kind required_courses and the set of course ids that the student finished
+#it returns the list of course ids from this rule that the student still did not do
+#if the student already did enough courses for the rule (needed or more) it returns an empty list
+#it is used only for the rules that name exact courses (mandatory, the two pairs, extra math), not for the points rules
+def find_missing_course_ids_for_required_courses_rule(rule: dict, completed_course_ids: set[str]) -> list[str]:
+    #the course ids that belong to this rule, as written in the json file
+    rule_course_ids = rule["courses"]
+    #how many of these courses the student must finish
+    needed_courses_count = rule["needed"]
+    #we count how many courses of this rule the student already finished
+    completed_courses_count = 0
+    for course_id in rule_course_ids:
+        #if this course is in the set of finished courses we count it
+        if course_id in completed_course_ids:
+            completed_courses_count += 1
+    #if the student finished enough courses the rule is done, so nothing is missing
+    if completed_courses_count >= needed_courses_count:
+        return []
+    else:
+        #the rule is not done, so we collect the courses of the rule that the student did not finish
+        missing_course_ids = []
+        for course_id in rule_course_ids:
+            #if this course is not in the set of finished courses it is missing
+            if course_id not in completed_course_ids:
+                missing_course_ids.append(course_id)
+        return missing_course_ids

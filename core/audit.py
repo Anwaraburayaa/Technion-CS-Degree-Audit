@@ -19,7 +19,7 @@ def load_requirements_from_file(path: str) -> dict:
 #it returns the list of course ids from this rule that the student still did not do
 #if the student already did enough courses for the rule (needed or more) it returns an empty list
 #it is used only for the rules that name exact courses (mandatory, the two pairs, extra math), not for the points rules
-def find_missing_course_ids_for_required_courses_rule(rule: dict, completed_course_ids: set[str]) -> list[str]:
+def find_missing_course_ids(rule: dict, completed_course_ids: set[str]) -> list[str]:
     #the course ids that belong to this rule, as written in the json file
     rule_course_ids = rule["courses"]
     #how many of these courses the student must finish

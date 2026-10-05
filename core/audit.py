@@ -58,5 +58,12 @@ def count_remaining_courses(rule: dict, completed_course_ids: set[str]) -> int:
     #the remaining courses is the needed minus the completed, if negative we return 0
     remaining_courses_count = needed_courses_count - completed_courses_count
     return max(remaining_courses_count, 0)
-   
- 
+
+
+   #func for siecnce chaic req that checks if the student has finished the sci chain he chose
+def is_chain_complete(rule: dict, completed_course_ids: set[str]) -> bool:
+    for option in rule["options"]:
+        #check if all courses in this option are completed
+        if all(course_id in completed_course_ids for course_id in option["courses"]):
+            return True
+    return False 

@@ -149,9 +149,9 @@
       "min_points": 2.0
     },
     {
-      "key": "enrichment",
+      "key": "malag",
       "kind": "manual_points",
-      "label": "Enrichment",
+      "label": "Malag",
       "min_points": 6.0
     },
     {
@@ -165,8 +165,8 @@
       "key": "general",
       "kind": "points_from_rules",
       "label": "General electives",
-      "note": "Manual entry only: the catalog has no list of these courses. Sport and enrichment minimums on the 3-year track are open questions Q9-Q10.",
-      "rules": ["sport", "enrichment", "free_other"],
+      "note": "Manual entry only: the catalog has no list of these courses. Sport and malag minimums on the 3-year track are open questions Q9-Q10.",
+      "rules": ["sport", "malag", "free_other"],
       "min_points": 10.0
     },
     {

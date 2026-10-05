@@ -67,3 +67,62 @@ def is_chain_complete(rule: dict, completed_course_ids: set[str]) -> bool:
         if all(course_id in completed_course_ids for course_id in option["courses"]):
             return True
     return False 
+
+#func for manual entrys put by ueser
+#it validates that the user put a valid  non negative num
+def check_manual_entries(manual_entries: dict[Category, float]) -> None:
+    """
+    Validates manual credit entries.
+    
+    Iterates through each category-points pair. If any points value
+    is below zero, immediately raises a ValueError identifying the category.
+    Zero points are permitted.
+    """
+    #  Iterate over each (key, value) pair in the dictionary
+    for category, points in manual_entries.items():
+        
+        # Check if the numerical value is negative
+        if points < 0:
+            raise ValueError(
+                f"Manual entry for {category.value} cannot be negative: {points}"
+            )
+
+
+#the main func of the audit, the ui calls only this one
+#it checks every rule and returns one AuditResult
+#1. refuse negative manual numbers
+#2. make the two empty result dicts
+#3. go over the rules one by one
+#4. turn the rule key into a Category
+#5. required_courses rule: save the missing courses and how many remain
+#6. science chain rule: save 0 if a chain is complete, 1 if not
+#7. return the two dicts as one AuditResult
+def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: set[str], manual_entries: dict[Category, float]) -> AuditResult:
+    #1. stop here if a manual number is negative
+    check_manual_entries(manual_entries)
+    #2. the two result dicts, we fill them in the loop
+    missing_courses_by_category = {}
+    remaining_by_category = {}
+    #3. we iterate over the rules
+    for rule in requirements["rules"]:
+        #4. the rule key as a Category, it is the key of both dicts
+        category = Category(rule["key"])
+        #5. rules that name exact courses
+        if rule["kind"] == "required_courses":
+            #we get the missing ids and turn each one into a Course
+            missing_course_ids = find_missing_course_ids(rule, completed_course_ids)
+            missing_courses = []
+            for course_id in missing_course_ids:
+                missing_courses.append(catalog.get_course_by_id(course_id))
+            #we save the missing courses and how many remain
+            missing_courses_by_category[category] = missing_courses
+            remaining_by_category[category] = count_remaining_courses(rule, completed_course_ids)
+        #6. the science chain rule
+        elif rule["kind"] == "one_complete_option":
+            #0 if one option is complete, 1 if not
+            if is_chain_complete(rule, completed_course_ids):
+                remaining_by_category[category] = 0
+            else:
+                remaining_by_category[category] = 1
+    #7. we return the result
+    return AuditResult(missing_courses_by_category, remaining_by_category)

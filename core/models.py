@@ -77,3 +77,13 @@ class Course:
     name_he: str
     name_en: str
     credits: float
+
+
+#this is the result of the audit, audit.py creates it and app.py reads it to show the student what is left
+#missing_courses_by_category: for each rule that names exact courses and is not done, the courses the student can still take
+#remaining_by_category: for every rule, how much is still missing (courses or points), 0 means the rule is done
+#frozen=True means we can not replace the fields after the result is created
+@dataclass(frozen=True)
+class AuditResult:
+    missing_courses_by_category: dict[Category, list[Course]]
+    remaining_by_category: dict[Category, float]

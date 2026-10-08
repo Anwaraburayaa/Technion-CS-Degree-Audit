@@ -170,3 +170,22 @@ def collect_excluded_course_ids(rule: dict, requirements: dict) -> set[str]:
 def count_remaining_points(minimum: float, have: float) -> float:
     remaining = minimum - have
     return max(remaining, 0.0)
+
+#some courses count in a rule only if the student also did another course
+#in our catalog  01040135 (ode) counts as the extra math course only together with 01140073, 01150203, 01240400 or 01140101
+#this func returns the completed courses as this rule should see them: a course whose condition is not met is removed
+def filter_conditional_courses(rule: dict, completed_course_ids: set[str]) -> set[str]:
+    #we copy the completed courses because we dont want to change the original set, all the rules use it
+    completed_courses_copy = set(completed_course_ids)
+    #we get the conditions of the rule, or an empty dict if the rule has none
+    rule_conditions = rule.get("conditional_courses", {})
+    #we iterate over the conditional courses and their condition courses
+    for course_id, condition_course_ids in rule_conditions.items():
+        #we check if the student did none of the condition courses
+        if not any(condition_course_id in completed_course_ids for condition_course_id in condition_course_ids):
+            #the condition is not met, so we remove the course from the copy
+            completed_courses_copy.discard(course_id)
+    #we return the copy
+    return completed_courses_copy
+
+        

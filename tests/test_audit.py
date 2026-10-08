@@ -267,7 +267,7 @@ def test_run_audit_physics_2mm_alone_completes_the_chain():
 
 
 def test_run_audit_everything_done_gives_zero_everywhere():
-    done = ALL_MANDATORY_FIXED_IDS | {"00440252", "02360360", "01040135", "01140075"}  # 18 fixed + both pairs + extra math + a chain
+    done = ALL_MANDATORY_FIXED_IDS | {"00440252", "02360360", "01040295", "01140075"}  # 18 fixed + both pairs + extra math (01040295 has no condition) + a chain
     result = audit_real(done)                       # run the audit
     day_2_categories = [                            # the five categories run_audit handles on Day 2
         Category.MANDATORY_FIXED,                   # the 18 fixed courses

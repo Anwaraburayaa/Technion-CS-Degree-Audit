@@ -89,35 +89,80 @@ def check_manual_entries(manual_entries: dict[Category, float]) -> None:
 
 
 #the main func of the audit, the ui calls only this one
-#it checks every rule and returns one AuditResult
+#it checks every rule of the degree and returns one AuditResult
+#1. refuse negative manual numbers
+#2. make the result dicts, and points_by_category for the points the student has
+#3. go over the rules one by one, and turn the rule key into a Category
+#4. required_courses: drop conditional courses, save the missing courses and how many remain
+#5. one_complete_option (science chain): 0 if a chain is complete, 1 if not
+#6. points_from_courses (science, list a, list b): completed points without the excluded courses, plus typed points
+#7. points_from_rules (list a + b, general): the sum of the points of the named rules
+#8. manual_points (sport, malag, other free): the points the student typed
+#9. manual_count (english courses): the number of courses the student typed
+#10. return the result
 def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: set[str], manual_entries: dict[Category, float]) -> AuditResult:
-    # stop here if a manual number is negative
+    #1. we stop here if a manual number is negative
     check_manual_entries(manual_entries)
-    #the two result dicts, we fill them in the loop
+    #2. the two result dicts, we fill them in the loop
     missing_courses_by_category = {}
     remaining_by_category = {}
-    # we iterate over the rules
+    #the points the student has in each points rule, the combined rules read them from here
+    points_by_category = {}
+    #3. we iterate over the rules
     for rule in requirements["rules"]:
-        # the rule key as a Category, it is the key of both dicts
+        #the rule key as a Category, it is the key of the dicts
         category = Category(rule["key"])
-        # rules that name exact courses
+        #4. rules that name exact courses
         if rule["kind"] == "required_courses":
+            #we remove a course whose condition is not met (01040135 in extra math)
+            rule_completed_ids = filter_conditional_courses(rule, completed_course_ids)
             #we get the missing ids and turn each one into a Course
-            missing_course_ids = find_missing_course_ids(rule, completed_course_ids)
+            missing_course_ids = find_missing_course_ids(rule, rule_completed_ids)
             missing_courses = []
             for course_id in missing_course_ids:
                 missing_courses.append(catalog.get_course_by_id(course_id))
             #we save the missing courses and how many remain
             missing_courses_by_category[category] = missing_courses
-            remaining_by_category[category] = count_remaining_courses(rule, completed_course_ids)
-        # the science chain rule
+            remaining_by_category[category] = count_remaining_courses(rule, rule_completed_ids)
+        #5. the science chain
         elif rule["kind"] == "one_complete_option":
             #0 if one option is complete, 1 if not
             if is_chain_complete(rule, completed_course_ids):
                 remaining_by_category[category] = 0
             else:
                 remaining_by_category[category] = 1
-    #we return the result
+        #6. points from a list of courses
+        elif rule["kind"] == "points_from_courses":
+            #we get the courses that must not count in this rule
+            excluded_course_ids = collect_excluded_course_ids(rule, requirements)
+            #we sum the points of the completed courses of the rule, and add the points the student typed
+            have = sum_completed_points(rule, completed_course_ids, excluded_course_ids, catalog)
+            have += manual_entries.get(category, 0.0)
+            #we save what the student has and what is left
+            points_by_category[category] = have
+            remaining_by_category[category] = count_remaining_points(rule["min_points"], have)
+        #7. the sum of other rules, they come earlier in the file so their points are ready
+        elif rule["kind"] == "points_from_rules":
+            #we add the points of every rule named in "rules"
+            have = 0.0
+            for part_key in rule["rules"]:
+                have += points_by_category[Category(part_key)]
+            #we save what the student has and what is left
+            points_by_category[category] = have
+            remaining_by_category[category] = count_remaining_points(rule["min_points"], have)
+        #8. points typed by the student
+        elif rule["kind"] == "manual_points":
+            #the typed points, or 0 if nothing was typed
+            have = manual_entries.get(category, 0.0)
+            #we save what the student has and what is left
+            points_by_category[category] = have
+            remaining_by_category[category] = count_remaining_points(rule["min_points"], have)
+        #9. a number of courses typed by the student
+        elif rule["kind"] == "manual_count":
+            #the typed number of courses, or 0 if nothing was typed
+            have = manual_entries.get(category, 0)
+            remaining_by_category[category] = count_remaining_points(rule["min_count"], have)
+    #10. we return the result
     return AuditResult(missing_courses_by_category, remaining_by_category)
 
 

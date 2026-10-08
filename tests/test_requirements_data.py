@@ -209,3 +209,25 @@ def test_a_rule_never_points_to_itself():
     requirements = load_requirements_file()         # read the file
     for rule in requirements["rules"]:              # go over the rules one by one
         assert rule["key"] not in rule.get("rules", []), rule["key"]  # a rule summing itself would never finish
+
+
+# --------------------------------------------------------------------------------------
+# Exclusions (exclude_rules on list_a and list_b)
+# --------------------------------------------------------------------------------------
+
+def test_exclude_rules_point_to_existing_rules_that_list_courses():
+    requirements = load_requirements_file()         # read the file
+    rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
+    for rule in requirements["rules"]:              # go over the rules one by one
+        for excluded_key in rule.get("exclude_rules", []):  # only list_a and list_b have this field
+            assert excluded_key in rules_by_key, f"{rule['key']} excludes unknown rule {excluded_key}"  # mistyped key
+            assert excluded_key != rule["key"], rule["key"]  # a rule must not exclude itself
+            assert "courses" in rules_by_key[excluded_key], excluded_key  # only a rule with a course list can be excluded
+
+
+def test_list_a_and_list_b_exclude_the_agreed_rules():
+    requirements = load_requirements_file()         # read the file
+    rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
+    four_course_rules = {"mandatory_fixed", "digital_systems", "compilation_or_architecture", "extra_math"}  # mandatory and extra math
+    assert set(rules_by_key["list_a"]["exclude_rules"]) == four_course_rules  # List A: the four course rules
+    assert set(rules_by_key["list_b"]["exclude_rules"]) == four_course_rules | {"science"}  # List B: the same four plus science

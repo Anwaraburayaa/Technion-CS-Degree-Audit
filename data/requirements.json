@@ -71,7 +71,7 @@
       "key": "list_a",
       "kind": "points_from_courses",
       "label": "List A",
-      "note": "02360360 appears here as printed in the catalog; mandatory courses never count in List A (rule in the code).",
+      "note": "02360360 appears here as printed in the catalog; mandatory courses never count in List A (see exclude_rules).",
       "courses": [
         "02340268", "02340302", "02340303", "02340304", "02340313", "02340326",
         "02340329", "02340493", "02340901", "02360002", "02360003", "02360004",
@@ -112,6 +112,7 @@
         "02360927", "02360990", "02360991", "02380100", "02380125", "02380739",
         "02380790", "02380900", "02380901", "02380902"
       ],
+      "exclude_rules": ["mandatory_fixed", "digital_systems", "compilation_or_architecture", "extra_math"],
       "min_points": 18.0
     },
     {
@@ -133,6 +134,7 @@
         "01340020", "01340058", "01340082", "01340113", "01340128", "01340119",
         "01340142", "02140909"
       ],
+      "exclude_rules": ["mandatory_fixed", "digital_systems", "compilation_or_architecture", "extra_math", "science"],
       "min_points": 0.0
     },
     {

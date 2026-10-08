@@ -90,24 +90,17 @@ def check_manual_entries(manual_entries: dict[Category, float]) -> None:
 
 #the main func of the audit, the ui calls only this one
 #it checks every rule and returns one AuditResult
-#1. refuse negative manual numbers
-#2. make the two empty result dicts
-#3. go over the rules one by one
-#4. turn the rule key into a Category
-#5. required_courses rule: save the missing courses and how many remain
-#6. science chain rule: save 0 if a chain is complete, 1 if not
-#7. return the two dicts as one AuditResult
 def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: set[str], manual_entries: dict[Category, float]) -> AuditResult:
-    #1. stop here if a manual number is negative
+    # stop here if a manual number is negative
     check_manual_entries(manual_entries)
-    #2. the two result dicts, we fill them in the loop
+    #the two result dicts, we fill them in the loop
     missing_courses_by_category = {}
     remaining_by_category = {}
-    #3. we iterate over the rules
+    # we iterate over the rules
     for rule in requirements["rules"]:
-        #4. the rule key as a Category, it is the key of both dicts
+        # the rule key as a Category, it is the key of both dicts
         category = Category(rule["key"])
-        #5. rules that name exact courses
+        # rules that name exact courses
         if rule["kind"] == "required_courses":
             #we get the missing ids and turn each one into a Course
             missing_course_ids = find_missing_course_ids(rule, completed_course_ids)
@@ -117,14 +110,14 @@ def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: 
             #we save the missing courses and how many remain
             missing_courses_by_category[category] = missing_courses
             remaining_by_category[category] = count_remaining_courses(rule, completed_course_ids)
-        #6. the science chain rule
+        # the science chain rule
         elif rule["kind"] == "one_complete_option":
             #0 if one option is complete, 1 if not
             if is_chain_complete(rule, completed_course_ids):
                 remaining_by_category[category] = 0
             else:
                 remaining_by_category[category] = 1
-    #7. we return the result
+    #we return the result
     return AuditResult(missing_courses_by_category, remaining_by_category)
 
 
@@ -149,3 +142,23 @@ def sum_completed_points(rule: dict, completed_course_ids: set[str], excluded_co
            total_points += course.credits
    # return the total
    return total_points
+
+
+#some courses are written in list a or list b but must not count there directly:
+#a mandatory course never counts in list a or b, for example 02360360 compilation is printed in list a but it is mandatory
+#(only if a student did both compilation and computer architecture, the second one counts in list a, this is not handled yet)
+#a science or extra math course counts in list b only through its surplus (above 8 or above 2.5 points), also not handled yet
+#the rule only names these rules in "exclude_rules", this func turns the names into course ids so sum_completed_points skips them
+def collect_excluded_course_ids(rule: dict, requirements: dict) -> set[str]:
+    #intialize an empty set
+    excluded_course_ids = set()
+
+    #get the names of the excluded rules, or an empty list
+    exclude_rule_keys = rule.get("exclude_rules", [])
+    #go over all the rules of the degree
+    for other_rule in requirements["rules"]:
+        #if a rule is excluded, add all its courses to the set
+        if other_rule["key"] in exclude_rule_keys:
+            excluded_course_ids.update(other_rule["courses"])
+    #return the set
+    return excluded_course_ids

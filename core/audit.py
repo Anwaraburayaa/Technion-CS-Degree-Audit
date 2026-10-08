@@ -233,4 +233,30 @@ def filter_conditional_courses(rule: dict, completed_course_ids: set[str]) -> se
     #we return the copy
     return completed_courses_copy
 
-        
+#the degree needs 118.5 points in total, and every point counts only once
+#this func adds the points of every completed course (each course once), the typed sport, malag and other free points,
+#and the points of the grade sheet courses the student assigned to a category (courses the catalog does not know)
+#typed science, list a and list b points are not added, they only move a surplus that is already counted
+#a replaced mandatory course counts with the points of the course the student really took (replacement_points)
+def sum_total_points(completed_course_ids: set[str], manual_entries: dict[Category, float], catalog: CourseCatalog, replacement_points: dict[str, float], assigned_points: dict[Category, float]) -> float:
+    total_points=0.0
+    #we iterate over course numbers in completeed courses and get them from catalog
+    for id in completed_course_ids:
+        course = catalog.get_course_by_id(id)
+        if course is not None:
+            #if the student replaced a mandatory course we add the points of the course he really took
+            if id in replacement_points:
+                total_points += replacement_points[id]
+            else:
+                total_points += course.credits
+    #we add the typed points of sport, malag and other free
+    total_points += manual_entries.get(Category.SPORT, 0.0)
+    total_points += manual_entries.get(Category.MALAG, 0.0)
+    total_points += manual_entries.get(Category.FREE_OTHER, 0.0)
+    #we add the points of the courses the student assigned to a category, these courses are not in the catalog
+    total_points += assigned_points.get(Category.LIST_A, 0.0)
+    total_points += assigned_points.get(Category.LIST_B, 0.0)
+    total_points += assigned_points.get(Category.SPORT, 0.0)
+    total_points += assigned_points.get(Category.MALAG, 0.0)
+    total_points += assigned_points.get(Category.FREE_OTHER, 0.0)
+    return total_points

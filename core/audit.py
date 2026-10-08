@@ -126,3 +126,26 @@ def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: 
                 remaining_by_category[category] = 1
     #7. we return the result
     return AuditResult(missing_courses_by_category, remaining_by_category)
+
+
+
+
+#this func returns how many points the student has in one points rule (science, list_a or list_b)
+#it adds the points of the completed courses of the rule, without the excluded courses
+#manual points are not added here, run_audit adds them
+
+def sum_completed_points(rule: dict, completed_course_ids: set[str], excluded_course_ids: set[str], catalog: CourseCatalog) -> float:
+   total_points = 0.0
+   for course_id in rule["courses"]:
+       # skip a course the student did not complete
+       if course_id not in completed_course_ids:
+           continue
+       #skip a course that is excluded from this rule
+       if course_id in excluded_course_ids:
+           continue
+       #add the points of the course from the catalog
+       course = catalog.get_course_by_id(course_id)
+       if course is not None:
+           total_points += course.credits
+   # return the total
+   return total_points

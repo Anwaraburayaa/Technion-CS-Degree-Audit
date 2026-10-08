@@ -35,11 +35,12 @@
       "key": "extra_math",
       "kind": "required_courses",
       "label": "Extra math course",
-      "note": "One course from the list on catalog p. 225. Counts as 2.5 points in mandatory; what happens to the surplus is a v2 rule (open question Q1).",
+      "note": "One course from the list on catalog p. 225. Counts as 2.5 points in mandatory; the surplus above 2.5 goes to List B (official faculty answer), a v2 rule. 01040135 counts only together with one of its conditional_courses.",
       "courses": [
         "01040135", "01040033", "01040174", "01040122", "01040142", "01040285",
         "01040295"
       ],
+      "conditional_courses": {"01040135": ["01140073", "01150203", "01240400", "01140101"]},
       "needed": 1
     },
     {

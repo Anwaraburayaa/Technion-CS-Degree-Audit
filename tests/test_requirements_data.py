@@ -231,3 +231,25 @@ def test_list_a_and_list_b_exclude_the_agreed_rules():
     four_course_rules = {"mandatory_fixed", "digital_systems", "compilation_or_architecture", "extra_math"}  # mandatory and extra math
     assert set(rules_by_key["list_a"]["exclude_rules"]) == four_course_rules  # List A: the four course rules
     assert set(rules_by_key["list_b"]["exclude_rules"]) == four_course_rules | {"science"}  # List B: the same four plus science
+
+
+# --------------------------------------------------------------------------------------
+# Conditional courses (conditional_courses on extra_math)
+# --------------------------------------------------------------------------------------
+
+def test_conditional_courses_belong_to_their_rule_and_exist():
+    requirements = load_requirements_file()         # read the file
+    catalog = CourseCatalog(str(COURSES_FILE))      # the 324 real courses
+    for rule in requirements["rules"]:              # go over the rules one by one
+        for course_id, required_ids in rule.get("conditional_courses", {}).items():  # only extra_math has this field
+            assert course_id in rule["courses"], f"{course_id} is not in {rule['key']}"  # the condition is on a course of this rule
+            assert len(required_ids) > 0, course_id  # a condition needs at least one course
+            for required_id in required_ids:        # every course of the condition
+                assert catalog.is_course_id_in_catalog(required_id), required_id  # must be a real course
+
+
+def test_extra_math_condition_on_01040135():
+    requirements = load_requirements_file()         # read the file
+    rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
+    conditions = rules_by_key["extra_math"]["conditional_courses"]  # the condition dict of extra_math
+    assert conditions == {"01040135": ["01140073", "01150203", "01240400", "01140101"]}  # exactly the confirmed condition

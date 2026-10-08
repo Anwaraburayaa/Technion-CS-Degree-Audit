@@ -83,7 +83,15 @@ class Course:
 #missing_courses_by_category: for each rule that names exact courses and is not done, the courses the student can still take
 #remaining_by_category: for every rule, how much is still missing (courses or points), 0 means the rule is done
 #frozen=True means we can not replace the fields after the result is created
+
+#we keep what is missing in every rule and in the degree total, and we say if the student can graduate
 @dataclass(frozen=True)
 class AuditResult:
     missing_courses_by_category: dict[Category, list[Course]]
     remaining_by_category: dict[Category, float]
+    remaining_total_points: float
+
+    #the student can graduate only when every rule is done and the total is done
+    @property
+    def is_eligible_to_graduate(self) -> bool:
+        return all(remaining == 0 for remaining in self.remaining_by_category.values()) and self.remaining_total_points == 0

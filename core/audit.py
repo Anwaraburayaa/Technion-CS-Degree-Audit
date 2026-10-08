@@ -162,3 +162,11 @@ def collect_excluded_course_ids(rule: dict, requirements: dict) -> set[str]:
             excluded_course_ids.update(other_rule["courses"])
     #return the set
     return excluded_course_ids
+
+
+#returns how much is still missing in one category: the minimum it requires minus what the student has
+#0 means done
+#used for every points category, for the english courses count, and for the degree total
+def count_remaining_points(minimum: float, have: float) -> float:
+    remaining = minimum - have
+    return max(remaining, 0.0)

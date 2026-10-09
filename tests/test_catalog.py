@@ -162,7 +162,7 @@ def test_duplicate_course_id_raises_value_error(tmp_path):
 
 
 def test_duplicate_hebrew_name_keeps_first_course(tmp_path):
-    same_name_twice = [                             # two different IDs with the same Hebrew name (like 00440252 / 02340252)
+    same_name_twice = [                             # two different IDs with the same Hebrew name (two different course numbers)
         {"id": "00000010", "name_he": "שם זהה", "name_en": "", "credits": 5.0},  # first in the file
         {"id": "00000020", "name_he": "שם זהה", "name_en": "", "credits": 5.0},  # second in the file
     ]
@@ -202,7 +202,7 @@ def test_normalize_examples():
 REAL_DATA_FILE = Path(__file__).parent.parent / "data" / "courses_data.json"  # tests/ → project folder → data/
 
 
-def test_real_course_data_file_loads_324_courses():
+def test_real_course_data_file_loads_323_courses():
     catalog = CourseCatalog(str(REAL_DATA_FILE))    # load the real file; fails if it is broken or has duplicate IDs
-    assert catalog.count_courses() == 324           # all courses from the 2024/2025 catalog
+    assert catalog.count_courses() == 323           # all courses from the 2024/2025 catalog
     assert catalog.find_course_by_name_or_id("02340114").name_en == "Introduction to Computer Science"  # spot check

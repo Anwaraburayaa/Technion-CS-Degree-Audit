@@ -9,7 +9,7 @@ Run from the project folder with:  pytest -v
 import json                                         # to read the requirements file
 from pathlib import Path                            # to build file paths that work on any system
 
-from core.catalog import CourseCatalog              # the class that loads the 324 courses
+from core.catalog import CourseCatalog              # the class that loads the 323 courses
 
 
 # --------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ from core.catalog import CourseCatalog              # the class that loads the 3
 
 PROJECT_FOLDER = Path(__file__).parent.parent                        # tests/ → project folder
 REQUIREMENTS_FILE = PROJECT_FOLDER / "data" / "requirements.json"    # the file under test
-COURSES_FILE = PROJECT_FOLDER / "data" / "courses_data.json"         # the 324 real courses
+COURSES_FILE = PROJECT_FOLDER / "data" / "courses_data.json"         # the 323 real courses
 
 KNOWN_KINDS = {                                     # every kind the audit engine will know how to check
     "required_courses",                             # "complete `needed` courses out of `courses`"
@@ -137,7 +137,7 @@ def test_every_course_id_in_requirements_exists_in_courses_data():
     unknown_ids = []                                # collect every bad ID so one run shows all of them
     for rule in requirements["rules"]:              # go over the rules one by one
         for course_id in collect_all_course_ids_of_rule(rule):  # IDs from `courses` and from `options`
-            if not catalog.is_course_id_in_catalog(course_id):  # the ID is not one of the 324 courses
+            if not catalog.is_course_id_in_catalog(course_id):  # the ID is not one of the 323 courses
                 unknown_ids.append((rule["key"], course_id))    # remember the rule and the bad ID
     assert unknown_ids == []                        # passes only if no bad ID was found
 
@@ -162,7 +162,7 @@ def test_every_course_in_courses_data_belongs_to_at_least_one_rule():
     ids_used_in_rules = set()                       # every ID that appears in any rule
     for rule in requirements["rules"]:              # go over the rules one by one
         ids_used_in_rules.update(collect_all_course_ids_of_rule(rule))  # add this rule's IDs to the set
-    all_course_ids = {course.id for course in catalog.get_all_courses_sorted_by_id()}  # the 324 IDs as a set
+    all_course_ids = {course.id for course in catalog.get_all_courses_sorted_by_id()}  # the 323 IDs as a set
     assert all_course_ids - ids_used_in_rules == set()  # set difference: courses that no rule mentions; must be empty
 
 
@@ -228,9 +228,17 @@ def test_exclude_rules_point_to_existing_rules_that_list_courses():
 def test_list_a_and_list_b_exclude_the_agreed_rules():
     requirements = load_requirements_file()         # read the file
     rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
-    four_course_rules = {"mandatory_fixed", "digital_systems", "compilation_or_architecture", "extra_math"}  # mandatory and extra math
-    assert set(rules_by_key["list_a"]["exclude_rules"]) == four_course_rules  # List A: the four course rules
-    assert set(rules_by_key["list_b"]["exclude_rules"]) == four_course_rules | {"science"}  # List B: the same four plus science
+    course_rules = {"mandatory_fixed", "compilation_or_architecture", "extra_math"}  # the three rules that name exact courses
+    assert set(rules_by_key["list_a"]["exclude_rules"]) == course_rules  # List A: the three course rules
+    assert set(rules_by_key["list_b"]["exclude_rules"]) == course_rules | {"science"}  # List B: the same three plus science
+
+
+def test_digital_systems_is_a_mandatory_course():
+    requirements = load_requirements_file()         # read the file
+    rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
+    assert "00440252" in rules_by_key["mandatory_fixed"]["courses"]  # Digital Systems and Computer Structure is mandatory
+    assert rules_by_key["mandatory_fixed"]["needed"] == 19  # all 19 mandatory courses are needed
+    assert "digital_systems" not in rules_by_key    # it has no rule of its own
 
 
 # --------------------------------------------------------------------------------------
@@ -239,7 +247,7 @@ def test_list_a_and_list_b_exclude_the_agreed_rules():
 
 def test_conditional_courses_belong_to_their_rule_and_exist():
     requirements = load_requirements_file()         # read the file
-    catalog = CourseCatalog(str(COURSES_FILE))      # the 324 real courses
+    catalog = CourseCatalog(str(COURSES_FILE))      # the 323 real courses
     for rule in requirements["rules"]:              # go over the rules one by one
         for course_id, required_ids in rule.get("conditional_courses", {}).items():  # only extra_math has this field
             assert course_id in rule["courses"], f"{course_id} is not in {rule['key']}"  # the condition is on a course of this rule

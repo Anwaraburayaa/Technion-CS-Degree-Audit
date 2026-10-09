@@ -52,7 +52,7 @@ data/requirements.json  ┘ → core/catalog.py → (student's selections in app
 }
 ```
 
-The file has **324 courses**: the mandatory courses, the extra math list, the science list, List A and List B, all from the 2024/2025 catalog.
+The file has **323 courses**: the mandatory courses, the extra math list, the science list, List A and List B, all from the 2024/2025 catalog.
 
 | Field | Meaning | Note |
 |---|---|---|
@@ -84,7 +84,7 @@ The file must express every v1 rule in `docs/DECISIONS.md`:
 |---|---|
 | Total ≥ 118.5 | Points, each course once |
 | Fixed mandatory courses | "All of these" |
-| `00440252` / `02340252` and `02360360` / `02360267` | "One of these" |
+| `02360360` / `02360267` | "One of these" |
 | Extra math course | "One course from this list" |
 | Science ≥ 8 | Points from a list |
 | List A ≥ 18 | Points from a list |

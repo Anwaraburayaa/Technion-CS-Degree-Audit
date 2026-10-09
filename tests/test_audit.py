@@ -18,8 +18,8 @@ from core.audit import find_missing_course_ids      # which courses of a rule ar
 from core.audit import is_chain_complete            # is one science chain option fully done
 from core.audit import load_requirements_from_file  # reads the rules file
 from core.audit import run_audit                    # the main function
-from core.catalog import CourseCatalog              # the class that loads the 324 courses
-from core.models import Category                    # the 14 rule names
+from core.catalog import CourseCatalog              # the class that loads the 323 courses
+from core.models import Category                    # the 13 rule names
 
 
 # --------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ from core.models import Category                    # the 14 rule names
 
 PROJECT_FOLDER = Path(__file__).parent.parent                        # tests/ → project folder
 REQUIREMENTS_FILE = PROJECT_FOLDER / "data" / "requirements.json"    # the real rules
-COURSES_FILE = PROJECT_FOLDER / "data" / "courses_data.json"         # the real 324 courses
+COURSES_FILE = PROJECT_FOLDER / "data" / "courses_data.json"         # the real 323 courses
 
 THREE_OF_FOUR_RULE = {                              # a made-up required_courses rule
     "key": "test_rule",                             # any name, these functions do not read it
@@ -56,10 +56,11 @@ CHAIN_RULE = {                                      # a made-up one_complete_opt
     ],
 }
 
-ALL_MANDATORY_FIXED_IDS = {                         # the 18 fixed mandatory courses of the real file
+ALL_MANDATORY_FIXED_IDS = {                         # the 19 fixed mandatory courses of the real file
     "01040031", "01040166", "02340114", "02340129", "03240033", "01040032",
     "01140071", "02340124", "02340125", "02340141", "00940412", "01040134",
     "02340218", "02340292", "02340118", "02340123", "02340247", "02360343",
+    "00440252",
 }
 
 
@@ -69,8 +70,8 @@ def load_real_files():
     Returns:
         A pair (requirements, catalog) ready for run_audit.
     """
-    requirements = load_requirements_from_file(str(REQUIREMENTS_FILE))  # the 14 real rules
-    catalog = CourseCatalog(str(COURSES_FILE))      # the 324 real courses
+    requirements = load_requirements_from_file(str(REQUIREMENTS_FILE))  # the 13 real rules
+    catalog = CourseCatalog(str(COURSES_FILE))      # the 323 real courses
     return requirements, catalog                    # both, in the order run_audit takes them
 
 
@@ -94,9 +95,9 @@ def audit_real(completed_course_ids, manual_entries=None):
 # load_requirements_from_file
 # --------------------------------------------------------------------------------------
 
-def test_load_returns_the_14_real_rules():
+def test_load_returns_the_13_real_rules():
     requirements = load_requirements_from_file(str(REQUIREMENTS_FILE))  # read the real file
-    assert len(requirements["rules"]) == 14         # one rule per Category member
+    assert len(requirements["rules"]) == 13         # one rule per Category member
     assert requirements["total_min_points"] == 118.5  # the degree total is read too
 
 
@@ -205,8 +206,7 @@ def test_manual_entries_negative_raises_and_names_the_category():
 def test_run_audit_with_no_courses_remaining_numbers():
     result = audit_real(set())                      # a student with no courses
     remaining = result.remaining_by_category        # the dict Category → what is left
-    assert remaining[Category.MANDATORY_FIXED] == 18  # all 18 fixed courses are left
-    assert remaining[Category.DIGITAL_SYSTEMS] == 1  # one course of the pair is left
+    assert remaining[Category.MANDATORY_FIXED] == 19  # all 19 fixed courses are left
     assert remaining[Category.COMPILATION_OR_ARCHITECTURE] == 1  # one course of the pair is left
     assert remaining[Category.EXTRA_MATH] == 1      # one extra math course is left
     assert remaining[Category.SCIENCE_CHAIN] == 1   # the chain is not done
@@ -215,8 +215,7 @@ def test_run_audit_with_no_courses_remaining_numbers():
 def test_run_audit_with_no_courses_missing_lists():
     result = audit_real(set())                      # a student with no courses
     missing = result.missing_courses_by_category    # the dict Category → list of Course
-    assert len(missing[Category.MANDATORY_FIXED]) == 18  # all 18 are listed
-    assert len(missing[Category.DIGITAL_SYSTEMS]) == 2  # both courses of the pair are options
+    assert len(missing[Category.MANDATORY_FIXED]) == 19  # all 19 are listed
     assert len(missing[Category.COMPILATION_OR_ARCHITECTURE]) == 2  # both courses of the pair are options
     assert len(missing[Category.EXTRA_MATH]) == 7   # all 7 extra math courses are options
 
@@ -229,10 +228,11 @@ def test_run_audit_lists_the_one_missing_mandatory_course_as_a_course_object():
     assert result.missing_courses_by_category[Category.MANDATORY_FIXED] == [catalog.get_course_by_id("02340114")]  # the Course object, not the number
 
 
-def test_run_audit_one_course_of_digital_systems_is_enough():
-    result = audit_real({"02340252"})               # one of the two numbers of the same course
-    assert result.remaining_by_category[Category.DIGITAL_SYSTEMS] == 0  # done
-    assert result.missing_courses_by_category[Category.DIGITAL_SYSTEMS] == []  # nothing listed
+def test_run_audit_digital_systems_is_a_mandatory_course():
+    result = audit_real({"00440252"})               # only Digital Systems and Computer Structure
+    assert result.remaining_by_category[Category.MANDATORY_FIXED] == 18  # 19 mandatory courses minus this one
+    missing_ids = [course.id for course in result.missing_courses_by_category[Category.MANDATORY_FIXED]]  # the numbers still missing
+    assert "00440252" not in missing_ids            # it is not listed as missing
 
 
 def test_run_audit_both_courses_of_a_pair_still_give_zero():
@@ -267,11 +267,10 @@ def test_run_audit_physics_2mm_alone_completes_the_chain():
 
 
 def test_run_audit_everything_done_gives_zero_everywhere():
-    done = ALL_MANDATORY_FIXED_IDS | {"00440252", "02360360", "01040295", "01140075"}  # 18 fixed + both pairs + extra math (01040295 has no condition) + a chain
+    done = ALL_MANDATORY_FIXED_IDS | {"00440252", "02360360", "01040295", "01140075"}  # 19 fixed + the pair + extra math (01040295 has no condition) + a chain
     result = audit_real(done)                       # run the audit
-    day_2_categories = [                            # the five categories run_audit handles on Day 2
-        Category.MANDATORY_FIXED,                   # the 18 fixed courses
-        Category.DIGITAL_SYSTEMS,                   # the first pair
+    day_2_categories = [                            # the four course categories run_audit handles on Day 2
+        Category.MANDATORY_FIXED,                   # the 19 fixed courses
         Category.COMPILATION_OR_ARCHITECTURE,       # the second pair
         Category.EXTRA_MATH,                        # one extra math course
         Category.SCIENCE_CHAIN,                     # one complete chain
@@ -308,7 +307,7 @@ def rules_by_key():
     Returns:
         A dict from rule key to rule dict, read from the real file.
     """
-    requirements = load_requirements_from_file(str(REQUIREMENTS_FILE))  # the 14 real rules
+    requirements = load_requirements_from_file(str(REQUIREMENTS_FILE))  # the 13 real rules
     return {rule["key"]: rule for rule in requirements["rules"]}  # one entry per rule
 
 
@@ -348,14 +347,14 @@ def test_sum_points_is_zero_when_nothing_is_completed():
 def test_list_a_excludes_the_courses_of_the_four_course_rules():
     requirements, _ = load_real_files()             # the real rules
     excluded = collect_excluded_course_ids(rules_by_key()["list_a"], requirements)  # list_a's exclusions
-    assert len(excluded) == 29                      # 18 + 2 + 2 + 7
+    assert len(excluded) == 28                      # 19 + 2 + 7
     assert "02360360" in excluded                   # compilation is mandatory, so not in list a
 
 
 def test_list_b_also_excludes_the_science_courses():
     requirements, _ = load_real_files()             # the real rules
     excluded = collect_excluded_course_ids(rules_by_key()["list_b"], requirements)  # list_b's exclusions
-    assert len(excluded) == 41                      # the same 29 + 12 science courses
+    assert len(excluded) == 40                      # the same 28 + 12 science courses
     assert "01240120" in excluded                   # a science course printed in list b
     assert "01040174" in excluded                   # an extra math course printed in list b
 

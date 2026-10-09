@@ -3,6 +3,7 @@
 #day 5 adds the manual numbers, the unknown courses choice and the audit result
 import streamlit as st  #we use streamlit to build the web page
 from core.assignment import build_assignment  #we use it to turn the student's choices into points
+from core.audit import load_requirements_from_file, run_audit  #we use them to load the rules and run the audit
 from core.catalog import CourseCatalog  #we use the catalog to find each course by its number
 from core.models import Category  #the manual numbers are saved under the category of their rule
 from core.parsing import extract_course_ids  #we use it to read course numbers from pasted text
@@ -10,6 +11,8 @@ from core.transcript import read_transcript_rows_from_pdf, split_passed_rows_by_
 
 #where the course data lives
 COURSES_PATH = "data/courses_data.json"
+#where the degree rules live
+REQUIREMENTS_PATH = "data/requirements.json"
 #where the style of the page lives
 STYLE_PATH = "assets/style.css"
 #the points the whole degree needs, the ruler at the top counts toward it
@@ -25,8 +28,30 @@ CHOICE_LABELS = {"ignore": "Ignore (not counted)", Category.LIST_A: "List A", Ca
 #we load the catalog once and keep it, so streamlit does not read the json again on every click
 @st.cache_resource
 def load_catalog() -> CourseCatalog:
-    #we read the 324 courses from the json file
+    #we read the 323 courses from the json file
     return CourseCatalog(COURSES_PATH)
+
+
+#we load the 13 rules once and keep them, so streamlit does not read the json again on every click
+@st.cache_resource
+def load_requirements() -> dict:
+    #we read the rules and the 118.5 total from the json file
+    return load_requirements_from_file(REQUIREMENTS_PATH)
+
+
+#we turn what is missing in one rule into words, the unit depends on the kind of rule
+def missing_text(rule: dict, remaining: float) -> str:
+    #a rule that names courses counts courses
+    if rule["kind"] == "required_courses":
+        return "1 course" if remaining == 1 else f"{remaining:g} courses"
+    #the science chain is done or not done
+    if rule["kind"] == "one_complete_option":
+        return "a complete chain"
+    #english-taught courses are a count
+    if rule["kind"] == "manual_count":
+        return "1 course" if remaining == 1 else f"{remaining:g} courses"
+    #all the other rules count points
+    return f"{remaining:g} points"
 
 
 #we turn a course number into the text shown in the list, like "02340218 · מבני נתונים 1 · Data Structures 1"
@@ -65,7 +90,7 @@ def hero_html(points: float) -> str:
             <div class="points-ruler-fill" style="width: {filled_percent:.1f}%"></div>
         </div>
         <div class="points-ruler-caption">
-            <span><strong>{points:g}</strong> of {TOTAL_POINTS:g} points from the courses you entered</span>
+            <span><strong>{points:g}</strong> of {TOTAL_POINTS:g} points counted by the audit</span>
             <span>A planning tool, the faculty's audit is the official one</span>
         </div>
     </div>
@@ -260,7 +285,122 @@ assigned_points, replacement_points = build_assignment(unknown_rows, choices)
 for mandatory_id in replacement_points:
     completed_course_ids.add(mandatory_id)
 
+#the heading of the results part
+st.header("5. Results")
+#the 13 rules and the 118.5 total (only the first time, then from the cache)
+requirements = load_requirements()
+#we run the audit with everything the student entered in sections 1 to 4
+result = run_audit(requirements, catalog, completed_course_ids, manual_entries, replacement_points, assigned_points)
+#the points the audit counted, it is what is left after we take the missing points from 118.5
+counted_points = TOTAL_POINTS - result.remaining_total_points
+#the rules that have a minimum of their own, list b and other free electives have none (they only count inside a sum rule)
+required_rules = [rule for rule in requirements["rules"] if rule.get("min_points") != 0]
+#how many of them are done, 0 means done
+rules_done = sum(1 for rule in required_rules if result.remaining_by_category[Category(rule["key"])] == 0)
+#the number of rules that have a minimum
+rules_total = len(required_rules)
+
+#the banner: green when every rule and the total are done, red otherwise
+if result.is_eligible_to_graduate:
+    #the green banner
+    st.markdown("<div class='result-banner result-ok'><strong>Eligible to graduate</strong><span>Every rule and the 118.5-point total are done, by this tool's count.</span></div>", unsafe_allow_html=True)
+else:
+    #the red banner, with how much is left
+    st.markdown(f"<div class='result-banner result-missing'><strong>Not eligible yet</strong><span>{rules_total - rules_done} of {rules_total} rules are not done, and {result.remaining_total_points:g} points are missing to {TOTAL_POINTS:g}.</span></div>", unsafe_allow_html=True)
+
+#three numbers side by side
+points_column, missing_column, rules_column = st.columns(3)
+#the points counted out of 118.5
+points_column.metric("Points counted", f"{counted_points:g} / {TOTAL_POINTS:g}")
+#the points still missing
+missing_column.metric("Points missing", f"{result.remaining_total_points:g}")
+#the rules done out of the rules that have a minimum
+rules_column.metric("Rules done", f"{rules_done} / {rules_total}")
+
+#for every rule key, the label of the sum rule it counts in, for example list_b -> "List A + List B"
+sum_rule_label = {}
+for rule in requirements["rules"]:
+    #only the sum rules list other rules
+    for part_key in rule.get("rules", []):
+        #we remember the label of the sum rule for each of its parts
+        sum_rule_label[part_key] = rule["label"]
+
+#one table row per rule, in the order of the file
+rule_rows = []
+for rule in requirements["rules"]:
+    #the category of this rule
+    category = Category(rule["key"])
+    #what is still missing in this rule, 0 means done
+    remaining = result.remaining_by_category[category]
+    #a rule with no minimum of its own is never done or missing alone, its points count in a sum rule
+    if rule.get("min_points") == 0:
+        status = "No minimum"
+        still_needed = f"Counts in {sum_rule_label.get(rule['key'], 'the total')}"
+    #a done rule
+    elif remaining == 0:
+        status = "✓ Done"
+        still_needed = ""
+    #a rule that is not done yet
+    else:
+        status = "Missing"
+        still_needed = missing_text(rule, remaining)
+    #the row: the rule, its status, and what is still needed in the right unit
+    rule_rows.append({"Requirement": rule["label"], "Status": status, "Still needed": still_needed})
+#the table of the 13 rules, tall enough to show every row without scrolling (35 pixels per row)
+st.dataframe(
+    rule_rows,
+    hide_index=True,
+    width="stretch",
+    height=(len(rule_rows) + 1) * 35 + 3,
+    #the first column is wide, so long rule names are not cut
+    column_config={
+        "Requirement": st.column_config.TextColumn(width="large"),
+        "Status": st.column_config.TextColumn(width="small"),
+        "Still needed": st.column_config.TextColumn(width="medium"),
+    },
+)
+
+#the courses the student can still take, only for the 4 rules that name courses
+st.subheader("Courses you still need")
+#we remember if any rule has missing courses
+any_missing = False
+for rule in requirements["rules"]:
+    #only the rules that name courses have a list of missing courses
+    if rule["kind"] != "required_courses":
+        continue
+    #the category of this rule
+    category = Category(rule["key"])
+    #the courses of this rule the student did not do yet, empty means done
+    missing_courses = result.missing_courses_by_category.get(category, [])
+    #a done rule has nothing to show
+    if not missing_courses:
+        continue
+    #this rule has missing courses
+    any_missing = True
+    #how many of them the student still needs
+    remaining = result.remaining_by_category[category]
+    #when every listed course is needed we say how many are missing, otherwise how many to take from the list
+    if remaining == len(missing_courses):
+        box_title = f"{rule['label']}: {missing_text(rule, remaining)} missing"
+    else:
+        box_title = f"{rule['label']}: take {missing_text(rule, remaining)} from these {len(missing_courses)}"
+    #a closed box per rule
+    with st.expander(box_title):
+        #one row per course
+        st.dataframe(
+            [{"Number": course.id, "Points": course.credits, "English name": course.name_en, "Hebrew name": course.name_he} for course in missing_courses],
+            hide_index=True,
+            width="stretch",
+            height=(len(missing_courses) + 1) * 35 + 3,
+        )
+#if nothing is missing, we say so
+if not any_missing:
+    st.write("No missing courses in the mandatory and choice-of-course rules.")
+
+#the disclaimer at the end of the page
+st.caption("This is a planning tool and an estimate. The faculty's audit is the official one.")
+
 #now we know the points, so we fill the band at the top of the page
-hero_place.markdown(hero_html(entered_points), unsafe_allow_html=True)
+hero_place.markdown(hero_html(counted_points), unsafe_allow_html=True)
 
 

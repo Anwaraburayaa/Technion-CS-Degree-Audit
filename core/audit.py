@@ -89,7 +89,7 @@ def check_manual_entries(manual_entries: dict[Category, float]) -> None:
 
 
 #the main func of the audit, the ui calls only this one
-#we go over the 14 rules, check each one by its kind, and save what is still missing
+#we go over the 13 rules, check each one by its kind, and save what is still missing
 #then we count the degree total, so the result can say if the student can graduate
 def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: set[str], manual_entries: dict[Category, float], replacement_points: dict[str, float] | None = None, assigned_points: dict[Category, float] | None = None) -> AuditResult:
     check_manual_entries(manual_entries)

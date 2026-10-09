@@ -21,7 +21,7 @@ with their source.
 |---|---|
 | Total | ≥ 118.5 points; each course's points counted **once** |
 | Mandatory fixed courses | All fixed mandatory courses completed |
-| Either-or group 1 | `00440252` **or** `02340252` (one is enough) |
+| Digital Systems and Computer Structure | `00440252`, part of the mandatory courses (the only number in SAP; `02340252` was removed) |
 | Either-or group 2 | `02360360` (תורת הקומפילציה) **or** `02360267` (מבנה מחשבים). Source: the student's information from the faculty — catalog p. 231 lists only `02360360` |
 | Extra math course | One course from the list on catalog p. 225 |
 | Science | ≥ 8 points from the science list **and** one complete chain (שרשרת) |

@@ -1,4 +1,4 @@
-#purpous is to Load the 324 courses from data/courses_data.json once, turn each one into a Course (from core/models.py), and let the rest of the program find any course instantly by ID, Hebrew name, or English name(if found)
+#purpous is to Load the 323 courses from data/courses_data.json once, turn each one into a Course (from core/models.py), and let the rest of the program find any course instantly by ID, Hebrew name, or English name(if found)
 import json
 from core.models import Course
 

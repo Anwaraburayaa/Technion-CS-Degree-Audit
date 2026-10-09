@@ -84,3 +84,67 @@ h2 {
         transition: none;
     }
 }
+
+/* streamlit draws its small icons (like the arrow of a closed box) with an icon font, so our font rule above must not replace it */
+[data-testid="stIconMaterial"] {
+    font-family: 'Material Symbols Rounded' !important;
+}
+
+/* section titles: a little smaller, with a thin line under them */
+h2 {
+    font-size: 1.45rem !important;
+    border-bottom: 1px solid #DDE3EC;
+    padding-bottom: 0.45rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+/* smaller titles inside a section, like "Courses you still need" */
+h3 {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+}
+
+/* the result banner: a colored line on the left and a soft background */
+.result-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 4px 0 14px 0;
+    border-left: 5px solid;
+}
+
+/* the title of the banner */
+.result-banner strong {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* green: eligible to graduate */
+.result-ok {
+    background: #E9F6EE;
+    border-color: #1E7A46;
+    color: #14532D;
+}
+
+/* red: something is still missing */
+.result-missing {
+    background: #FBECEC;
+    border-color: #B42318;
+    color: #7A1A12;
+}
+
+/* the three numbers as white cards */
+[data-testid="stMetric"] {
+    background: #FFFFFF;
+    border: 1px solid #DDE3EC;
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+
+/* the closed boxes as white cards */
+[data-testid="stExpander"] details {
+    background: #FFFFFF;
+    border-radius: 10px;
+}

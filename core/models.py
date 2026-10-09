@@ -22,8 +22,7 @@ class Category(Enum):
     used by configuration files and other parts of the audit system.
 
     Members:
-        MANDATORY_FIXED: The 18 fixed mandatory courses; all are required.
-        DIGITAL_SYSTEMS: 00440252 or 02340252; one is required.
+        MANDATORY_FIXED: The 19 fixed mandatory courses, Digital Systems (00440252) included; all are required.
         COMPILATION_OR_ARCHITECTURE: 02360360 or 02360267; one is required.
         EXTRA_MATH: Additional mathematics required beyond the core program.
         SCIENCE: At least 8 points from the science course list.
@@ -39,7 +38,6 @@ class Category(Enum):
     """
 
     MANDATORY_FIXED = "mandatory_fixed"
-    DIGITAL_SYSTEMS = "digital_systems"
     COMPILATION_OR_ARCHITECTURE = "compilation_or_architecture"
     EXTRA_MATH = "extra_math"
     SCIENCE = "science"

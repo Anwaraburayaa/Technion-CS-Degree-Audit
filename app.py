@@ -2,8 +2,9 @@
 #day 4: the student enters the courses he passed in three ways and sees them in one table
 #day 5 adds the manual numbers, the unknown courses choice and the audit result
 import streamlit as st  #we use streamlit to build the web page
-
+from core.assignment import build_assignment  #we use it to turn the student's choices into points
 from core.catalog import CourseCatalog  #we use the catalog to find each course by its number
+from core.models import Category  #the manual numbers are saved under the category of their rule
 from core.parsing import extract_course_ids  #we use it to read course numbers from pasted text
 from core.transcript import read_transcript_rows_from_pdf, split_passed_rows_by_catalog  #we use them to read the grade sheet pdf
 
@@ -13,6 +14,12 @@ COURSES_PATH = "data/courses_data.json"
 STYLE_PATH = "assets/style.css"
 #the points the whole degree needs, the ruler at the top counts toward it
 TOTAL_POINTS = 118.5
+#grade-sheet courses that are known to replace a mandatory course: grade-sheet id -> mandatory id
+KNOWN_REPLACEMENTS = {"01040066": "01040166", "01040195": "01040031", "02340117": "02340114"}
+#the categories the student can give to a grade-sheet course that is not in the catalog
+ASSIGNABLE_CATEGORIES = [Category.LIST_A, Category.LIST_B, Category.SPORT, Category.MALAG, Category.FREE_OTHER]
+#the text the student sees for every choice except a replacement
+CHOICE_LABELS = {"ignore": "Ignore (not counted)", Category.LIST_A: "List A", Category.LIST_B: "List B", Category.SPORT: "Sport", Category.MALAG: "Malag", Category.FREE_OTHER: "Other free elective"}
 
 
 #we load the catalog once and keep it, so streamlit does not read the json again on every click
@@ -34,6 +41,14 @@ def course_label(catalog: CourseCatalog, course_id: str) -> str:
     #we return the full text
     return label
 
+
+#we turn a choice into the text shown in the dropdown
+def choice_label(choice: Category | str) -> str:
+    # a replacement, we show which mandatory course it replaces
+    if isinstance(choice, str) and choice.startswith("replace:"):
+        return f"Replaces mandatory {choice.split(':')[1]}"
+    #ignore or a category, we take the text from the dict
+    return CHOICE_LABELS[choice]
 
 #we build the blue band at the top: the title, one line about the app, and a ruler of the points entered so far
 def hero_html(points: float) -> str:
@@ -90,7 +105,12 @@ with tab_choose:
 #way 2: the student pastes text with course numbers
 with tab_paste:
     #a big text box for the pasted text
-    pasted_text = st.text_area("Paste course numbers (any format: one per line, commas, or a whole copied page)", height=150)
+    #the paste box does not check grades, so we ask for passed courses only and send grade sheets to the pdf tab
+    pasted_text = st.text_area(
+        "Paste only courses you passed. For a grade sheet, use the PDF upload, which checks the grades.",
+        height=150,
+        help="Any format works: one number per line, commas, or a whole copied page. Every 8-digit number is read.",
+    )
     #we read every 8 digit number from the text
     pasted_course_ids = extract_course_ids(pasted_text)
     #we keep only the numbers our catalog knows
@@ -137,7 +157,7 @@ with tab_pdf:
             st.code("\n".join(unreadable_lines))
         #we show the passed courses the catalog does not know, the student will choose what they are on day 5
         if unknown_rows:
-            st.info("Passed courses that are not in this track's lists (sport, malag, other faculties...). You will choose what each one is in the next step.")
+            st.info("Passed courses that are not in this track's lists (sport, malag, other faculties...). Choose what each one is in section 4 below.")
             st.dataframe(
                 [{"Number": row.course_id, "Name": row.name, "Points": row.points, "Grade": row.grade_text} for row in unknown_rows],
                 hide_index=True,
@@ -168,5 +188,79 @@ else:
     #a short hint when nothing is selected yet
     st.info("No courses yet. Choose them from the list, paste their numbers or upload your grade sheet.")
 
+#the heading of the manual part
+st.header("3. Manual inputs")
+#we explain what these numbers are and when not to type them
+st.write("Points the catalog has no course list for. Type only what is not in an uploaded grade sheet, those courses are assigned in the next section.")
+#two columns, so the four boxes take less space
+left_column, right_column = st.columns(2)
+#the left column: sport and malag
+with left_column:
+    #sport points, the degree needs at least 2
+    sport_points = st.number_input("Sport points", min_value=0.0, step=0.5, help="Physical education courses. The degree needs at least 2.")
+    #malag points, the degree needs at least 6
+    malag_points = st.number_input("Malag points", min_value=0.0, step=0.5, help="General enrichment courses (מל\"ג). The degree needs at least 6.")
+#the right column: other free electives and english-taught courses
+with right_column:
+    #other free elective points, they count only in the general rule and the total
+    free_other_points = st.number_input("Other free-elective points", min_value=0.0, step=0.5, help="Free electives that are not sport or malag.")
+    #the number of courses taught in english, a count and not points
+    english_taught_count = st.number_input("English-taught courses (count)", min_value=0, step=1, help="How many courses you took that were taught in English. The degree needs at least 2.")
+#the moved surplus is hidden in a closed box, most students do not need it
+with st.expander("Moved surplus (advanced)"):
+    #we explain what a moved surplus is and that it does not raise the total
+    st.write("Points above a rule's minimum that the faculty lets you move to another rule. They count in that rule only, not in the total, because the course is already counted once.")
+    #science points moved here by hand
+    science_surplus = st.number_input("Science surplus", min_value=0.0, step=0.5)
+    #list a points moved here by hand
+    list_a_surplus = st.number_input("List A surplus", min_value=0.0, step=0.5)
+    #list b points moved here by hand, for example the extra math above 2.5
+    list_b_surplus = st.number_input("List B surplus", min_value=0.0, step=0.5, help="For example the extra math points above 2.5.")
+#we put all the typed numbers in one dict, run_audit gets it in step 17
+manual_entries = {
+    Category.SPORT: sport_points,  #points
+    Category.MALAG: malag_points,  #points
+    Category.FREE_OTHER: free_other_points,  #points
+    Category.ENGLISH_TAUGHT: float(english_taught_count),  #a count, saved as a float like the others
+    Category.SCIENCE: science_surplus,  #moved surplus, not in the total
+    Category.LIST_A: list_a_surplus,  #moved surplus, not in the total
+    Category.LIST_B: list_b_surplus,  #moved surplus, not in the total
+}
+
+#the heading of the part for grade-sheet courses that are not in the catalog
+st.header("4. Grade-sheet courses not in the catalog")
+#the student's choice for every course id, empty when there is no pdf
+choices = {}
+#we show the dropdowns only if the grade sheet has such courses
+if unknown_rows:
+    #we tell the student what to do
+    st.write("Choose what each course is. Courses left on Ignore are not counted.")
+    #the ids that already got a dropdown
+    seen_ids = set()
+    #one dropdown for every course id
+    for row in unknown_rows:
+        #a course passed twice gets one dropdown
+        if row.course_id in seen_ids:
+            continue
+        #we remember this id
+        seen_ids.add(row.course_id)
+        #the normal options, ignore first so it is chosen at the start
+        options = ["ignore"] + ASSIGNABLE_CATEGORIES
+        #a known replacement goes first, so it is chosen at the start
+        if row.course_id in KNOWN_REPLACEMENTS:
+            options = ["replace:" + KNOWN_REPLACEMENTS[row.course_id]] + options
+        #the dropdown, the hebrew name is last so the browser keeps the order of the numbers
+        choices[row.course_id] = st.selectbox(f"{row.course_id} · {row.points:g} pts · {row.name}", options, format_func=choice_label)
+else:
+    #no such courses, we say so
+    st.info("No grade-sheet courses outside the catalog. Upload a grade sheet in section 1 to see them here.")
+#we turn the choices into points, this works also when there are no choices
+assigned_points, replacement_points = build_assignment(unknown_rows, choices)
+#a replaced mandatory course counts as done in the mandatory rule
+for mandatory_id in replacement_points:
+    completed_course_ids.add(mandatory_id)
+
 #now we know the points, so we fill the band at the top of the page
 hero_place.markdown(hero_html(entered_points), unsafe_allow_html=True)
+
+

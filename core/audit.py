@@ -125,6 +125,8 @@ def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: 
             have = sum_completed_points(rule, completed_course_ids, excluded_course_ids, catalog)
             have += manual_entries.get(category, 0.0)
             have += assigned_points.get(category, 0.0)
+            #list b also gets the science points above 8, science comes earlier in the file so its points are ready
+            have += count_surplus_points(rule, requirements, points_by_category)
             points_by_category[category] = have
             remaining_by_category[category] = count_remaining_points(rule["min_points"], have)
         #list a + b and general: the sum of their parts, which come earlier in the file
@@ -199,6 +201,20 @@ def collect_excluded_course_ids(rule: dict, requirements: dict) -> set[str]:
 def count_remaining_points(minimum: float, have: float) -> float:
     remaining = minimum - have
     return max(remaining, 0.0)
+
+#returns the points above the minimum of the rules named in this rule's "surplus_from"
+#for example science above 8 points counts in list b (confirmed by the faculty)
+#the course is still counted once in the degree total, the surplus only helps list b and list a + b
+def count_surplus_points(rule: dict, requirements: dict, points_by_category: dict[Category, float]) -> float:
+    surplus = 0.0
+    #we iterate over the rules and take the ones this rule gets a surplus from
+    for source_rule in requirements["rules"]:
+        if source_rule["key"] in rule.get("surplus_from", []):
+            #what the student has in the source rule, it was counted earlier in run_audit
+            have = points_by_category.get(Category(source_rule["key"]), 0.0)
+            #only the part above its minimum moves
+            surplus += max(have - source_rule["min_points"], 0.0)
+    return surplus
 
 #some courses count in a rule only if the student also did another course
 #in our catalog  01040135 (ode) counts as the extra math course only together with 01140073, 01150203, 01240400 or 01140101

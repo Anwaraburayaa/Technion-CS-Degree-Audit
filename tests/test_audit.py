@@ -14,6 +14,7 @@ import pytest                                       # for pytest.raises
 
 from core.audit import check_manual_entries         # refuses negative manual numbers
 from core.audit import count_remaining_courses      # how many courses of a rule are still needed
+from core.audit import count_surplus_points         # the points above a minimum that move to another rule
 from core.audit import find_missing_course_ids      # which courses of a rule are not done
 from core.audit import is_chain_complete            # is one science chain option fully done
 from core.audit import load_requirements_from_file  # reads the rules file
@@ -522,7 +523,7 @@ def test_run_audit_full_sample_student():
     assert remaining[Category.SCIENCE] == 0         # 15 science points
     assert remaining[Category.SCIENCE_CHAIN] == 0   # physics 2 + 3
     assert remaining[Category.LIST_A] == pytest.approx(6.5)  # 18 - (3.5 + 3 typed + 5 assigned)
-    assert remaining[Category.LIST_A_PLUS_B] == pytest.approx(9.0)  # 24.5 - (11.5 + 4)
+    assert remaining[Category.LIST_A_PLUS_B] == pytest.approx(2.0)  # 24.5 - (11.5 + 4 + 7 science points above 8)
     assert remaining[Category.GENERAL] == pytest.approx(2.0)  # 10 - (2 + 6)
     assert remaining[Category.ENGLISH_TAUGHT] == 1  # 2 - 1
     assert result.remaining_total_points == pytest.approx(7.0)  # 118.5 - 111.5
@@ -539,3 +540,39 @@ def test_run_audit_a_finished_student_is_eligible():
     assert all(left == 0 for left in result.remaining_by_category.values())  # every rule is done
     assert result.remaining_total_points == 0.0     # the total is done
     assert result.is_eligible_to_graduate is True   # can graduate
+
+
+# --------------------------------------------------------------------------------------
+# count_surplus_points (science above 8 points counts in list b)
+# --------------------------------------------------------------------------------------
+
+SURPLUS_RULES = {"rules": [                         # made-up rules: science with a minimum, and a rule that takes its surplus
+    {"key": "science", "min_points": 8.0},          # the source
+    {"key": "list_b", "surplus_from": ["science"]},  # takes what science has above 8
+]}
+
+
+def test_surplus_is_the_points_above_the_minimum():
+    taker = SURPLUS_RULES["rules"][1]               # the rule that takes the surplus
+    assert count_surplus_points(taker, SURPLUS_RULES, {Category.SCIENCE: 11.5}) == pytest.approx(3.5)  # 11.5 - 8
+
+
+def test_surplus_is_zero_below_the_minimum():
+    taker = SURPLUS_RULES["rules"][1]               # the rule that takes the surplus
+    assert count_surplus_points(taker, SURPLUS_RULES, {Category.SCIENCE: 6.0}) == 0.0  # nothing above 8
+
+
+def test_surplus_is_zero_for_a_rule_without_surplus_from():
+    assert count_surplus_points({"key": "list_a"}, SURPLUS_RULES, {Category.SCIENCE: 11.5}) == 0.0  # list a takes nothing
+
+
+def test_run_audit_science_above_8_counts_in_list_a_plus_b_but_not_twice_in_the_total():
+    result = audit_real({"01140075", "01140246", "01240120"})  # three science courses, 5 points each: 15
+    assert result.remaining_by_category[Category.SCIENCE] == 0  # 15 >= 8
+    assert result.remaining_by_category[Category.LIST_A_PLUS_B] == pytest.approx(17.5)  # 24.5 - 7 (the points above 8)
+    assert result.remaining_total_points == pytest.approx(103.5)  # 118.5 - 15: each course once in the total
+
+
+def test_run_audit_science_below_8_gives_no_surplus():
+    result = audit_real({"01140075"})               # one science course, 5 points
+    assert result.remaining_by_category[Category.LIST_A_PLUS_B] == pytest.approx(24.5)  # nothing moves

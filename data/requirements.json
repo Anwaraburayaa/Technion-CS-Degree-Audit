@@ -40,7 +40,7 @@
       "key": "science",
       "kind": "points_from_courses",
       "label": "Science",
-      "note": "The chain is the separate rule science_chain. The surplus above 8 points is a v2 rule.",
+      "note": "The chain is the separate rule science_chain. The points above 8 count in list_b (see surplus_from there).",
       "courses": [
         "01140075", "01140052", "01140054", "01140073", "01140101", "01140246",
         "01240120", "01250001", "01250801", "01240510", "01340058", "01340020"
@@ -113,7 +113,7 @@
       "key": "list_b",
       "kind": "points_from_courses",
       "label": "List B",
-      "note": "No minimum of its own; it only counts inside list_a_plus_b.",
+      "note": "No minimum of its own; it only counts inside list_a_plus_b. It also gets the science points above 8 (surplus_from, confirmed by the faculty).",
       "courses": [
         "00360044", "00440105", "00440127", "00440131", "00440137", "00440157",
         "00440167", "00440169", "00440202", "00460201", "00460206", "00460332",
@@ -129,6 +129,7 @@
         "01340142", "02140909"
       ],
       "exclude_rules": ["mandatory_fixed", "compilation_or_architecture", "extra_math", "science"],
+      "surplus_from": ["science"],
       "min_points": 0.0
     },
     {

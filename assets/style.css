@@ -1,0 +1,86 @@
+/* we load ibm plex sans, it has latin and hebrew in the same design, so course names look the same in both languages */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&display=swap');
+
+/* we use the font everywhere in the app */
+html, body, [class*="st-"], .stMarkdown, h1, h2, h3, input, textarea, button {
+    font-family: 'IBM Plex Sans', 'IBM Plex Sans Hebrew', sans-serif;
+}
+
+/* we keep the page narrow enough to read easily */
+.block-container {
+    max-width: 980px;
+    padding-top: 2rem;
+}
+
+/* the blue band at the top of the page */
+.audit-hero {
+    background: #1F4E8C;
+    color: #FFFFFF;
+    border-radius: 14px;
+    padding: 28px 32px 24px 32px;
+    margin-bottom: 8px;
+}
+
+/* the title inside the band */
+.audit-hero h1 {
+    color: #FFFFFF;
+    font-size: 2.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px 0;
+    padding: 0;
+}
+
+/* the line under the title */
+.audit-hero p {
+    color: #D6E2F2;
+    font-size: 1.02rem;
+    margin: 0 0 22px 0;
+}
+
+/* the points ruler: a track with a tick every 10 points */
+.points-ruler {
+    position: relative;
+    height: 14px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.16);
+    background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(var(--tick) - 1px), rgba(255, 255, 255, 0.35) calc(var(--tick) - 1px), rgba(255, 255, 255, 0.35) var(--tick));
+    overflow: hidden;
+}
+
+/* the filled part of the ruler, how many points the student entered */
+.points-ruler-fill {
+    height: 100%;
+    background: #F2C14E;
+    border-radius: 7px;
+    transition: width 0.4s ease;
+}
+
+/* the text under the ruler */
+.points-ruler-caption {
+    display: flex;
+    justify-content: space-between;
+    color: #D6E2F2;
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* the number of points in the caption stands out */
+.points-ruler-caption strong {
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+/* the section titles */
+h2 {
+    font-weight: 600 !important;
+    letter-spacing: -0.01em;
+    padding-top: 1.6rem !important;
+}
+
+/* we respect students who asked their system for less motion */
+@media (prefers-reduced-motion: reduce) {
+    .points-ruler-fill {
+        transition: none;
+    }
+}

@@ -9,6 +9,10 @@ from core.transcript import read_transcript_rows_from_pdf, split_passed_rows_by_
 
 #where the course data lives
 COURSES_PATH = "data/courses_data.json"
+#where the style of the page lives
+STYLE_PATH = "assets/style.css"
+#the points the whole degree needs, the ruler at the top counts toward it
+TOTAL_POINTS = 118.5
 
 
 #we load the catalog once and keep it, so streamlit does not read the json again on every click
@@ -31,12 +35,35 @@ def course_label(catalog: CourseCatalog, course_id: str) -> str:
     return label
 
 
-#the title of the browser tab, and a wide page so the tables have room
-st.set_page_config(page_title="Technion CS Degree Audit", layout="wide")
-#the title at the top of the page
-st.title("Technion CS Degree Audit")
-#one line that says what the app is for
-st.caption("3-year track, catalog 2024/2025 (תשפ\"ה). A planning tool, the official audit is done by the faculty.")
+#we build the blue band at the top: the title, one line about the app, and a ruler of the points entered so far
+def hero_html(points: float) -> str:
+    #how much of the ruler is filled, never more than the whole ruler
+    filled_percent = min(points / TOTAL_POINTS, 1.0) * 100
+    #the distance between two ticks of the ruler, one tick every 10 points
+    tick_percent = 10 / TOTAL_POINTS * 100
+    #the html of the band, the css in assets/style.css gives it its look
+    return f"""
+    <div class="audit-hero">
+        <h1>Technion CS Degree Audit</h1>
+        <p>See what you still need to graduate from the 3-year track, catalog 2024/2025 (תשפ"ה).</p>
+        <div class="points-ruler" style="--tick: {tick_percent:.3f}%">
+            <div class="points-ruler-fill" style="width: {filled_percent:.1f}%"></div>
+        </div>
+        <div class="points-ruler-caption">
+            <span><strong>{points:g}</strong> of {TOTAL_POINTS:g} points from the courses you entered</span>
+            <span>A planning tool, the faculty's audit is the official one</span>
+        </div>
+    </div>
+    """
+
+
+#the title of the browser tab, and a centered page that is easy to read
+st.set_page_config(page_title="Technion CS Degree Audit", page_icon="🎓", layout="centered")
+#we load our style file and add it to the page
+with open(STYLE_PATH, encoding="utf-8") as style_file:
+    st.markdown(f"<style>{style_file.read()}</style>", unsafe_allow_html=True)
+#an empty place at the top, we fill it with the band at the end, when we know how many points the student entered
+hero_place = st.empty()
 
 #we load the catalog (only the first time, then it comes from the cache)
 catalog = load_catalog()
@@ -131,8 +158,15 @@ if completed_course_ids:
         selected_rows.append({"Number": course.id, "Hebrew name": course.name_he, "English name": course.name_en, "Points": course.credits})
     #the table itself
     st.dataframe(selected_rows, hide_index=True, width="stretch")
-    #the number of courses and their points, each course counted once
-    st.write(f"{len(completed_course_ids)} courses, {sum(course['Points'] for course in selected_rows)} points from the catalog.")
+    #the points of the selected courses, each course counted once
+    entered_points = sum(row["Points"] for row in selected_rows)
+    #the number of courses and their points
+    st.write(f"{len(completed_course_ids)} courses, {entered_points:g} points from the catalog.")
 else:
+    #no courses yet, so no points yet
+    entered_points = 0.0
     #a short hint when nothing is selected yet
-    st.info("No courses yet. Choose, paste or upload above.")
+    st.info("No courses yet. Choose them from the list, paste their numbers or upload your grade sheet.")
+
+#now we know the points, so we fill the band at the top of the page
+hero_place.markdown(hero_html(entered_points), unsafe_allow_html=True)

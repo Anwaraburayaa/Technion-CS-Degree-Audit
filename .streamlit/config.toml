@@ -1,0 +1,16 @@
+#the look of the app, streamlit reads this file when it starts
+[theme]
+#we always use the light look, so the colors below are the ones the student sees
+base = "light"
+#technion blue, used for buttons, the chosen tab and the chosen courses
+primaryColor = "#1F4E8C"
+#the page background, a cool light grey
+backgroundColor = "#F5F7FA"
+#the background of boxes, tables and inputs
+secondaryBackgroundColor = "#E8EDF4"
+#the color of the text
+textColor = "#1C2430"
+
+[client]
+#we hide the developer menu and the deploy button from the student
+toolbarMode = "minimal"

@@ -113,6 +113,8 @@ def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: 
                 missing_courses.append(catalog.get_course_by_id(course_id))
             missing_courses_by_category[category] = missing_courses
             remaining_by_category[category] = count_remaining_courses(rule, rule_completed_ids)
+            #the points of the completed courses of this rule, extra math and the pair move what is above their limit
+            points_by_category[category] = sum(catalog.get_course_by_id(course_id).credits for course_id in rule["courses"] if course_id in rule_completed_ids)
         #the science chain
         elif rule["kind"] == "one_complete_option":
             if is_chain_complete(rule, completed_course_ids):
@@ -149,7 +151,7 @@ def run_audit(requirements: dict, catalog: CourseCatalog, completed_course_ids: 
     #the degree total and what is still missing to 118.5
     total_points = sum_total_points(completed_course_ids, manual_entries, catalog, replacement_points, assigned_points)
     remaining_total_points = count_remaining_points(requirements["total_min_points"], total_points)
-    return AuditResult(missing_courses_by_category, remaining_by_category, remaining_total_points)
+    return AuditResult(missing_courses_by_category, remaining_by_category, remaining_total_points, points_by_category)
 
 
 
@@ -212,8 +214,10 @@ def count_surplus_points(rule: dict, requirements: dict, points_by_category: dic
         if source_rule["key"] in rule.get("surplus_from", []):
             #what the student has in the source rule, it was counted earlier in run_audit
             have = points_by_category.get(Category(source_rule["key"]), 0.0)
-            #only the part above its minimum moves
-            surplus += max(have - source_rule["min_points"], 0.0)
+            #the limit: "surplus_above" if the rule has it (extra math 2.5, the pair 3), otherwise its minimum (science 8)
+            limit = source_rule.get("surplus_above", source_rule.get("min_points", 0.0))
+            #only the part above the limit moves
+            surplus += max(have - limit, 0.0)
     return surplus
 
 #some courses count in a rule only if the student also did another course

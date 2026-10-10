@@ -245,11 +245,14 @@ def test_list_b_takes_the_science_surplus_from_an_earlier_rule():
     requirements = load_requirements_file()         # read the file
     keys_in_order = [rule["key"] for rule in requirements["rules"]]  # the rule keys in file order
     rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}  # dict: key → rule
-    assert rules_by_key["list_b"]["surplus_from"] == ["science"]  # the faculty's answer
+    assert rules_by_key["list_b"]["surplus_from"] == ["science", "extra_math"]  # the faculty's answers
+    assert rules_by_key["list_a"]["surplus_from"] == ["compilation_or_architecture"]  # the second of the pair
+    assert rules_by_key["extra_math"]["surplus_above"] == 2.5  # extra math counts 2.5, the rest moves
+    assert rules_by_key["compilation_or_architecture"]["surplus_above"] == 3.0  # one course of the pair (3 points) stays
     for rule in requirements["rules"]:              # every rule that takes a surplus
         for source_key in rule.get("surplus_from", []):  # every rule it takes from
             assert keys_in_order.index(source_key) < keys_in_order.index(rule["key"]), source_key  # the source is counted first
-            assert "min_points" in rules_by_key[source_key], source_key  # the source has a minimum to be above
+            assert "min_points" in rules_by_key[source_key] or "surplus_above" in rules_by_key[source_key], source_key  # the source has a limit to be above
 
 
 # --------------------------------------------------------------------------------------

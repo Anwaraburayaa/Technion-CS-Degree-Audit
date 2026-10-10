@@ -5,7 +5,7 @@ import streamlit as st  #we use streamlit to build the web page
 
 from app_texts import LANGUAGES, RULE_LABELS_HE, TEXTS  #every text of the page, in english and in hebrew
 from core.assignment import build_assignment  #we use it to turn the student's choices into points
-from core.audit import load_requirements_from_file, run_audit  #we use them to load the rules and run the audit
+from core.audit import count_surplus_points, load_requirements_from_file, run_audit  #we use them to load the rules, run the audit and show what moved
 from core.catalog import CourseCatalog  #we use the catalog to find each course by its number
 from core.models import Category  #the manual numbers are saved under the category of their rule
 from core.parsing import extract_course_ids  #we use it to read course numbers from pasted text
@@ -279,24 +279,12 @@ with right_column:
     #the number of courses taught in english, a count and not points
     english_taught_count = st.number_input(t("english_label"), min_value=0, step=1, help=t("english_help"), key="english_taught_count")
 #the moved surplus is hidden in a closed box, most students do not need it
-with st.expander(t("surplus_title")):
-    #we explain what a moved surplus is and that it does not raise the total
-    st.write(t("surplus_intro"))
-    #science points moved here by hand
-    science_surplus = st.number_input(t("science_surplus"), min_value=0.0, step=0.5, key="science_surplus")
-    #list a points moved here by hand
-    list_a_surplus = st.number_input(t("list_a_surplus"), min_value=0.0, step=0.5, key="list_a_surplus")
-    #list b points moved here by hand, for example the extra math above 2.5
-    list_b_surplus = st.number_input(t("list_b_surplus"), min_value=0.0, step=0.5, help=t("list_b_help"), key="list_b_surplus")
 #we put all the typed numbers in one dict, run_audit gets it
 manual_entries = {
     Category.SPORT: sport_points,  #points
     Category.MALAG: malag_points,  #points
     Category.FREE_OTHER: free_other_points,  #points
     Category.ENGLISH_TAUGHT: float(english_taught_count),  #a count, saved as a float like the others
-    Category.SCIENCE: science_surplus,  #moved surplus, not in the total
-    Category.LIST_A: list_a_surplus,  #moved surplus, not in the total
-    Category.LIST_B: list_b_surplus,  #moved surplus, not in the total
 }
 
 #the heading of the part for grade-sheet courses that are not in the catalog
@@ -446,6 +434,21 @@ st.dataframe(
         t("col_still"): st.column_config.TextColumn(width="medium"),
     },
 )
+#the points that moved by themselves from one rule to another (science, extra math, the pair)
+moved_lines = []
+#every rule key with its rule, to find the rules points move from
+rules_by_key = {rule["key"]: rule for rule in requirements["rules"]}
+for rule in requirements["rules"]:
+    #every rule this rule takes a surplus from
+    for source_key in rule.get("surplus_from", []):
+        #how many points moved from this one source
+        moved = count_surplus_points({"surplus_from": [source_key]}, requirements, result.points_by_category)
+        #we show only what really moved
+        if moved > 0:
+            moved_lines.append(t("moved_line", points=f"{moved:g}", source=rule_label(rules_by_key[source_key]), target=rule_label(rule)))
+#a short box with the moved points, only if something moved
+if moved_lines:
+    st.info(t("moved_title") + "  \n" + "  \n".join(moved_lines))
 
 #the courses the student can still take, only for the rules that name courses
 st.subheader(t("still_need_header"))

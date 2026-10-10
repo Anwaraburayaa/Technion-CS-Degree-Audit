@@ -20,15 +20,17 @@
       "key": "compilation_or_architecture",
       "kind": "required_courses",
       "label": "Theory of Compilation or Computer Architecture",
-      "note": "Source: the student's information from the faculty. Catalog p. 231 lists only 02360360 (open question Q5).",
+      "note": "Source: the student's information from the faculty. Catalog p. 231 lists only 02360360 (open question Q5). If both are done, the second (3 points, above surplus_above) counts in list_a.",
       "courses": ["02360360", "02360267"],
-      "needed": 1
+      "needed": 1,
+      "surplus_above": 3.0
     },
     {
       "key": "extra_math",
       "kind": "required_courses",
       "label": "Extra math course",
-      "note": "One course from the list on catalog p. 225. Counts as 2.5 points in mandatory; the surplus above 2.5 goes to List B (official faculty answer), a v2 rule. 01040135 counts only together with one of its conditional_courses.",
+      "note": "One course from the list on catalog p. 225. Counts as 2.5 points in mandatory; the points above 2.5 count in list_b (official faculty answer, see surplus_above). 01040135 counts only together with one of its conditional_courses.",
+      "surplus_above": 2.5,
       "courses": [
         "01040135", "01040033", "01040174", "01040122", "01040142", "01040285",
         "01040295"
@@ -65,7 +67,8 @@
       "key": "list_a",
       "kind": "points_from_courses",
       "label": "List A",
-      "note": "02360360 appears here as printed in the catalog; mandatory courses never count in List A (see exclude_rules).",
+      "note": "02360360 appears here as printed in the catalog; mandatory courses never count in List A (see exclude_rules). It gets the second of compilation / architecture (surplus_from).",
+      "surplus_from": ["compilation_or_architecture"],
       "courses": [
         "02340268", "02340302", "02340303", "02340304", "02340313", "02340326",
         "02340329", "02340493", "02340901", "02360002", "02360003", "02360004",
@@ -113,7 +116,7 @@
       "key": "list_b",
       "kind": "points_from_courses",
       "label": "List B",
-      "note": "No minimum of its own; it only counts inside list_a_plus_b. It also gets the science points above 8 (surplus_from, confirmed by the faculty).",
+      "note": "No minimum of its own; it only counts inside list_a_plus_b. It also gets the science points above 8 and the extra math points above 2.5 (surplus_from, confirmed by the faculty).",
       "courses": [
         "00360044", "00440105", "00440127", "00440131", "00440137", "00440157",
         "00440167", "00440169", "00440202", "00460201", "00460206", "00460332",
@@ -129,7 +132,7 @@
         "01340142", "02140909"
       ],
       "exclude_rules": ["mandatory_fixed", "compilation_or_architecture", "extra_math", "science"],
-      "surplus_from": ["science"],
+      "surplus_from": ["science", "extra_math"],
       "min_points": 0.0
     },
     {

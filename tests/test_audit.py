@@ -576,3 +576,43 @@ def test_run_audit_science_above_8_counts_in_list_a_plus_b_but_not_twice_in_the_
 def test_run_audit_science_below_8_gives_no_surplus():
     result = audit_real({"01140075"})               # one science course, 5 points
     assert result.remaining_by_category[Category.LIST_A_PLUS_B] == pytest.approx(24.5)  # nothing moves
+
+
+# --------------------------------------------------------------------------------------
+# the automatic surplus of extra math and of the compilation / architecture pair
+# --------------------------------------------------------------------------------------
+
+def test_surplus_uses_surplus_above_when_the_rule_has_it():
+    rules = {"rules": [{"key": "extra_math", "surplus_above": 2.5}]}  # a made-up rule with a limit and no minimum
+    taker = {"key": "list_b", "surplus_from": ["extra_math"]}  # takes what extra math has above 2.5
+    assert count_surplus_points(taker, rules, {Category.EXTRA_MATH: 5.0}) == pytest.approx(2.5)  # 5 - 2.5
+
+
+def test_run_audit_extra_math_above_2_5_counts_in_list_a_plus_b():
+    result = audit_real({"01040295"})               # calculus 3, an extra math course of 5 points
+    assert result.remaining_by_category[Category.EXTRA_MATH] == 0  # the rule is done
+    assert result.remaining_by_category[Category.LIST_A_PLUS_B] == pytest.approx(22.0)  # 24.5 - 2.5 (the points above 2.5)
+    assert result.remaining_total_points == pytest.approx(113.5)  # 118.5 - 5: the course once in the total
+
+
+def test_run_audit_a_2_5_point_extra_math_course_moves_nothing():
+    result = audit_real({"01040033"})               # vector analysis, 2.5 points
+    assert result.remaining_by_category[Category.LIST_A_PLUS_B] == pytest.approx(24.5)  # nothing above 2.5
+
+
+def test_run_audit_the_second_of_compilation_and_architecture_counts_in_list_a():
+    result = audit_real({"02360360", "02360267"})   # both courses of the pair, 3 points each
+    assert result.remaining_by_category[Category.COMPILATION_OR_ARCHITECTURE] == 0  # the rule is done
+    assert result.remaining_by_category[Category.LIST_A] == pytest.approx(15.0)  # 18 - 3 (the second course)
+    assert result.remaining_total_points == pytest.approx(112.5)  # 118.5 - 6: each course once in the total
+
+
+def test_run_audit_one_course_of_the_pair_moves_nothing():
+    result = audit_real({"02360360"})               # only compilation
+    assert result.remaining_by_category[Category.LIST_A] == pytest.approx(18.0)  # nothing moves
+
+
+def test_run_audit_gives_the_points_of_each_rule():
+    result = audit_real({"01040295", "01140075"})   # extra math 5 points and science 5 points
+    assert result.points_by_category[Category.EXTRA_MATH] == pytest.approx(5.0)  # the course rule saves its points
+    assert result.points_by_category[Category.SCIENCE] == pytest.approx(5.0)  # the points rule too

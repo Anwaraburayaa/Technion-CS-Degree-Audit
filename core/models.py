@@ -6,7 +6,7 @@ requirements. Keeping these definitions in one place gives every module the
 same representation and avoids duplicated, inconsistent data structures.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 class Category(Enum):
@@ -88,6 +88,8 @@ class AuditResult:
     missing_courses_by_category: dict[Category, list[Course]]
     remaining_by_category: dict[Category, float]
     remaining_total_points: float
+    #the points the student has in each rule that counts points or courses with points, used to show what moved
+    points_by_category: dict[Category, float] = field(default_factory=dict)
 
     #the student can graduate only when every rule is done and the total is done
     @property

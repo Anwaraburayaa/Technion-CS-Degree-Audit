@@ -9,8 +9,8 @@ jobs:                                 # list of jobs to run
   wake:                               # job name
     runs-on: ubuntu-latest            # run on a fresh Linux machine from GitHub
     steps:                            # steps run in order
-      - uses: actions/checkout@v4     # download your repo onto that machine
-      - uses: actions/setup-python@v5 # install Python
+      - uses: actions/checkout@v5     # download your repo onto that machine
+      - uses: actions/setup-python@v6 # install Python
         with:                         # settings for the Python step
           python-version: "3.11"      # which Python version to use
       - run: pip install playwright   # install the Playwright library

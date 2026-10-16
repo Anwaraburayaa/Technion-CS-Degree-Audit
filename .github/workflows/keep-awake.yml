@@ -1,0 +1,18 @@
+name: Keep Streamlit App Awake        # name shown in the Actions tab
+
+on:                                   # when this workflow runs
+  schedule:                           # run on a timer
+    - cron: "0 */4 * * *"             # every 4 hours, at minute 0 (UTC)
+  workflow_dispatch:                  # also allow a manual "Run workflow" button
+
+jobs:                                 # list of jobs to run
+  wake:                               # job name
+    runs-on: ubuntu-latest            # run on a fresh Linux machine from GitHub
+    steps:                            # steps run in order
+      - uses: actions/checkout@v4     # download your repo onto that machine
+      - uses: actions/setup-python@v5 # install Python
+        with:                         # settings for the Python step
+          python-version: "3.11"      # which Python version to use
+      - run: pip install playwright   # install the Playwright library
+      - run: playwright install --with-deps chromium  # download Chromium and its system libraries
+      - run: python .github/scripts/wake_app.py       # run the wake-up script
